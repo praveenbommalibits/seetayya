@@ -1,0 +1,167 @@
+backend:
+  name: github
+  repo: UPDATE_OWNER/UPDATE_REPOSITORY
+  branch: main
+
+local_backend: true
+media_folder: public/uploads
+public_folder: /uploads
+display_url: https://seetayyafoundation.org
+
+site_url: https://seetayyafoundation.org
+logo_url: /uploads/logo.jpg
+
+collections:
+  - name: events
+    label: Events
+    folder: src/content/events
+    create: true
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: English Title, name: title.en, widget: string }
+      - { label: Telugu Title, name: title.te, widget: string, required: false }
+      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Category, name: category, widget: string }
+      - { label: Location, name: location, widget: string }
+      - { label: English Summary, name: summary.en, widget: text }
+      - { label: Telugu Summary, name: summary.te, widget: text, required: false }
+      - { label: Cover Image, name: coverImage, widget: image }
+      - label: Photos
+        name: photos
+        widget: list
+        required: false
+        fields:
+          - { label: Image, name: src, widget: image }
+          - { label: Alt Text, name: alt, widget: string }
+          - { label: Caption, name: caption, widget: string, required: false }
+      - { label: Sponsors, name: sponsors, widget: list, required: false }
+      - { label: Featured on Homepage, name: featured, widget: boolean, default: false }
+      - { label: Published, name: published, widget: boolean, default: true }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: dailySponsors
+    label: Daily Sponsors
+    folder: src/content/dailySponsors
+    create: true
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Sponsor Name, name: sponsorName, widget: string }
+      - { label: Occasion, name: occasion, widget: string }
+      - { label: Meal Type, name: mealType, widget: string }
+      - { label: English Note, name: note.en, widget: text }
+      - { label: Telugu Note, name: note.te, widget: text, required: false }
+      - label: Photos
+        name: photos
+        widget: list
+        required: false
+        fields:
+          - { label: Image, name: src, widget: image }
+          - { label: Alt Text, name: alt, widget: string }
+          - { label: Caption, name: caption, widget: string, required: false }
+      - { label: Published, name: published, widget: boolean, default: true }
+
+  - name: albums
+    label: Media Albums
+    folder: src/content/albums
+    create: true
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: English Title, name: title.en, widget: string }
+      - { label: Telugu Title, name: title.te, widget: string, required: false }
+      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Category, name: category, widget: string }
+      - { label: Cover Image, name: coverImage, widget: image }
+      - { label: English Summary, name: summary.en, widget: text }
+      - { label: Telugu Summary, name: summary.te, widget: text, required: false }
+      - label: Photos
+        name: photos
+        widget: list
+        fields:
+          - { label: Image, name: src, widget: image }
+          - { label: Alt Text, name: alt, widget: string }
+          - { label: Caption, name: caption, widget: string, required: false }
+      - { label: Published, name: published, widget: boolean, default: true }
+
+  - name: articles
+    label: Articles
+    folder: src/content/articles
+    create: true
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: English Title, name: title.en, widget: string }
+      - { label: Telugu Title, name: title.te, widget: string, required: false }
+      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - { label: English Summary, name: summary.en, widget: text }
+      - { label: Telugu Summary, name: summary.te, widget: text, required: false }
+      - { label: Cover Image, name: coverImage, widget: image, required: false }
+      - { label: Published, name: published, widget: boolean, default: true }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: certificates
+    label: Certificates
+    folder: src/content/certificates
+    create: true
+    format: frontmatter
+    slug: "{{slug}}"
+    fields:
+      - { label: English Title, name: title.en, widget: string }
+      - { label: Telugu Title, name: title.te, widget: string, required: false }
+      - { label: Issuer, name: issuer, widget: string }
+      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
+      - { label: Document File, name: file, widget: file }
+      - { label: Preview Image, name: image, widget: image, required: false }
+      - { label: Published, name: published, widget: boolean, default: true }
+
+  - name: settings
+    label: Settings
+    files:
+      - name: donationSettings
+        label: Donation Settings
+        file: src/content/donationSettings/main.json
+        format: json
+        fields:
+          - { label: Razorpay Payment Link, name: razorpayPaymentLink, widget: string, required: false }
+          - { label: UPI ID, name: upiId, widget: string }
+          - { label: UPI Name, name: upiName, widget: string }
+          - { label: Bank Name, name: bankName, widget: string }
+          - { label: Account Name, name: accountName, widget: string }
+          - { label: Account Number, name: accountNumber, widget: string }
+          - { label: IFSC, name: ifsc, widget: string }
+          - { label: QR Image, name: qrImage, widget: image }
+          - { label: English Receipt Note, name: receiptNote.en, widget: text }
+          - { label: Telugu Receipt Note, name: receiptNote.te, widget: text, required: false }
+
+  - name: pages
+    label: Page Content
+    files:
+      - name: about
+        label: About Page
+        file: src/content/pages/about.md
+        format: frontmatter
+        fields:
+          - { label: English Title, name: title.en, widget: string }
+          - { label: Telugu Title, name: title.te, widget: string, required: false }
+          - { label: English Description, name: description.en, widget: text }
+          - { label: Telugu Description, name: description.te, widget: text, required: false }
+          - { label: Hero Image, name: heroImage, widget: image, required: false }
+          - { label: Updated, name: updated, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
+          - { label: Published, name: published, widget: boolean, default: true }
+          - { label: Body, name: body, widget: markdown }
+      - name: visionMission
+        label: Vision & Mission Page
+        file: src/content/pages/vision-mission.md
+        format: frontmatter
+        fields:
+          - { label: English Title, name: title.en, widget: string }
+          - { label: Telugu Title, name: title.te, widget: string, required: false }
+          - { label: English Description, name: description.en, widget: text }
+          - { label: Telugu Description, name: description.te, widget: text, required: false }
+          - { label: Hero Image, name: heroImage, widget: image, required: false }
+          - { label: Updated, name: updated, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
+          - { label: Published, name: published, widget: boolean, default: true }
+          - { label: Body, name: body, widget: markdown }

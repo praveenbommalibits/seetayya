@@ -1,0 +1,14 @@
+---
+interface Props {
+  en: string;
+  te?: string;
+  class?: string;
+}
+
+const { en, te, class: className = "" } = Astro.props;
+---
+
+<div class:list={["space-y-2", className]}>
+  <p>{en}</p>
+  {te && <p class="telugu text-ink/75">{te}</p>}
+</div>

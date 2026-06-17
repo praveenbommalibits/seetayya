@@ -1,0 +1,32 @@
+---
+interface Localized {
+  en: string;
+  te?: string;
+}
+
+interface Props {
+  date: Date;
+  sponsorName: string;
+  occasion: string;
+  mealType: string;
+  note: Localized;
+}
+
+const { date, sponsorName, occasion, mealType, note } = Astro.props;
+const dateText = date.toLocaleDateString("en-IN", {
+  weekday: "short",
+  day: "numeric",
+  month: "short",
+  year: "numeric"
+});
+---
+
+<article class="rounded-lg border border-saffron-100 bg-white p-5 shadow-sm">
+  <p class="text-sm font-bold uppercase tracking-wide text-saffron-700">
+    <time datetime={date.toISOString()}>{dateText}</time>
+  </p>
+  <h3 class="mt-3 text-2xl font-extrabold text-ink">{sponsorName}</h3>
+  <p class="mt-1 font-semibold text-leaf-700">{mealType} / {occasion}</p>
+  <p class="mt-4 text-sm leading-6 text-ink/75">{note.en}</p>
+  {note.te && <p class="telugu mt-3 text-sm text-ink/70">{note.te}</p>}
+</article>

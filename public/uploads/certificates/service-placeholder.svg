@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" role="img" aria-label="Service recognition placeholder">
+  <rect width="900" height="640" fill="#f7f8f5"/>
+  <rect x="42" y="42" width="816" height="556" fill="none" stroke="#17201a" stroke-width="8"/>
+  <circle cx="450" cy="190" r="72" fill="#256331"/>
+  <path d="M420 192l22 24 44-54" fill="none" stroke="#ffe6b8" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="450" y="318" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="800" fill="#17201a">Service Recognition</text>
+  <text x="450" y="382" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#256331">Replace with official recognition image or PDF.</text>
+  <text x="450" y="456" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#17201a">Editable from /admin without a database.</text>
+</svg>

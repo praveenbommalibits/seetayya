@@ -1,0 +1,51 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const programs = [
+  {
+    title: "Daily Annadanam",
+    te: "నిత్య అన్నదానం",
+    text: "Food support for residents, visitors, and people in need, with sponsor-day recognition for donors.",
+    href: "/sponsor-a-day"
+  },
+  {
+    title: "Elder Care Home",
+    te: "వృద్ధుల ఆశ్రయం",
+    text: "Shelter, dignity, daily routines, and compassionate support for elders without dependable care.",
+    href: "/about"
+  },
+  {
+    title: "Special School & Rehabilitation",
+    te: "ప్రత్యేక పాఠశాల మరియు పునరావాసం",
+    text: "Support for mentally challenged and differently abled children through care, guidance, and community involvement.",
+    href: "/rehabilitation-center"
+  },
+  {
+    title: "Health & Awareness Camps",
+    te: "ఆరోగ్య మరియు అవగాహన శిబిరాలు",
+    text: "Blood donation, eye care, yoga, legal awareness, and wellness programmes with local partners.",
+    href: "/events"
+  }
+];
+---
+
+<BaseLayout title="Programs | Seetayya Foundation" description="Explore Seetayya Foundation programmes including daily annadanam, elder care, rehabilitation support, and health awareness camps.">
+  <section class="bg-white py-16">
+    <div class="container-pad">
+      <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-leaf-700">Programs</p>
+      <h1 class="mt-3 max-w-3xl text-5xl font-black leading-tight text-ink">Service areas built around everyday needs.</h1>
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-ink/72">The foundation’s work combines daily care with community events, sponsor support, and public health activities.</p>
+    </div>
+  </section>
+  <section class="py-16">
+    <div class="container-pad grid gap-6 md:grid-cols-2">
+      {programs.map((program) => (
+        <a href={program.href} class="rounded-lg border border-ink/10 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
+          <h2 class="text-2xl font-black text-ink">{program.title}</h2>
+          <p class="telugu mt-2 font-semibold text-leaf-700">{program.te}</p>
+          <p class="mt-4 text-sm leading-6 text-ink/70">{program.text}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

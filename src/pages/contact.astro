@@ -1,0 +1,30 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+const email = "seetayyafoundation@example.org";
+---
+
+<BaseLayout title="Contact | Seetayya Foundation" description="Contact Seetayya Foundation for donations, sponsor-day service, volunteering, visits, and foundation support.">
+  <section class="bg-white py-16">
+    <div class="container-pad grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+      <div>
+        <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-leaf-700">Contact</p>
+        <h1 class="mt-3 text-5xl font-black leading-tight text-ink">Reach the foundation team.</h1>
+        <p class="telugu mt-4 text-lg font-semibold text-leaf-700">సేవ, దానం, స్వచ్ఛంద సేవ కోసం మమ్మల్ని సంప్రదించండి.</p>
+        <div class="mt-8 rounded-lg border border-ink/10 bg-mist p-6">
+          <h2 class="text-xl font-extrabold text-ink">Address</h2>
+          <p class="mt-3 text-sm leading-6 text-ink/70">Sompeta region, Srikakulam district, Andhra Pradesh, India</p>
+          <p class="mt-4 text-sm leading-6 text-ink/70">Update verified phone and email before production launch.</p>
+        </div>
+      </div>
+      <form action={`mailto:${email}`} method="post" enctype="text/plain" class="rounded-lg border border-ink/10 bg-mist p-6 shadow-sm">
+        <div class="grid gap-4">
+          <label class="grid gap-2 text-sm font-bold text-ink">Name <input name="Name" required class="rounded-md border border-ink/15 px-3 py-3 font-normal" /></label>
+          <label class="grid gap-2 text-sm font-bold text-ink">Phone or email <input name="Contact" required class="rounded-md border border-ink/15 px-3 py-3 font-normal" /></label>
+          <label class="grid gap-2 text-sm font-bold text-ink">Message <textarea name="Message" rows="6" required class="rounded-md border border-ink/15 px-3 py-3 font-normal"></textarea></label>
+          <button class="rounded-md bg-leaf-700 px-5 py-3 text-sm font-extrabold text-white transition hover:bg-leaf-900">Email message</button>
+          <p class="text-xs leading-5 text-ink/55">This static form opens the visitor’s email client and does not store messages on the website.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+</BaseLayout>

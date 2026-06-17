@@ -1,0 +1,14 @@
+{
+  "razorpayPaymentLink": "https://rzp.io/l/seetayya-foundation",
+  "upiId": "seetayyafoundation@upi",
+  "upiName": "Seetayya Foundation",
+  "bankName": "Update Bank Name",
+  "accountName": "Seetayya Foundation",
+  "accountNumber": "Update account number",
+  "ifsc": "UPDATEIFSC",
+  "qrImage": "/uploads/qr/upi-placeholder.svg",
+  "receiptNote": {
+    "en": "For receipts, please send your payment reference and contact details to the foundation team.",
+    "te": "రసీదు కోసం మీ చెల్లింపు వివరాలు మరియు సంప్రదింపు వివరాలను ఫౌండేషన్ బృందానికి పంపండి."
+  }
+}
