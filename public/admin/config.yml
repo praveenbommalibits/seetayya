@@ -1,15 +1,15 @@
 backend:
   name: github
-  repo: UPDATE_OWNER/UPDATE_REPOSITORY
+  repo: praveenbommalibits/seetayya
   branch: main
 
 local_backend: true
 media_folder: public/uploads
 public_folder: /uploads
-display_url: https://seetayyafoundation.org
+display_url: https://praveenbommalibits.github.io/seetayya
 
-site_url: https://seetayyafoundation.org
-logo_url: /uploads/logo.jpg
+site_url: https://praveenbommalibits.github.io/seetayya
+logo_url: https://praveenbommalibits.github.io/seetayya/uploads/logo.jpg
 
 collections:
   - name: events

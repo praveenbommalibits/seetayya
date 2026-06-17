@@ -4,6 +4,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import DonationCta from "@components/DonationCta.astro";
 import EventCard from "@components/EventCard.astro";
 import SponsorCard from "@components/SponsorCard.astro";
+import { withBase } from "../lib/url";
 
 const events = (await getCollection("events"))
   .filter((entry) => entry.data.published)
@@ -23,7 +24,7 @@ const featuredEvents = events.filter((entry) => entry.data.featured).slice(0, 3)
   description="Seetayya Foundation supports elders, orphans, differently abled children, and people in need through daily food, shelter, medical care, and community service."
 >
   <section class="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-ink text-white">
-    <img src="/uploads/events/founders.jpg" alt="Seetayya Foundation service gathering" class="absolute inset-0 h-full w-full object-cover opacity-45" />
+    <img src={withBase("/uploads/events/founders.jpg")} alt="Seetayya Foundation service gathering" class="absolute inset-0 h-full w-full object-cover opacity-45" />
     <div class="absolute inset-0 bg-ink/45"></div>
     <div class="container-pad relative grid min-h-[calc(100svh-5rem)] items-end pb-12 pt-24 md:pb-16">
       <div class="max-w-3xl">
@@ -35,10 +36,10 @@ const featuredEvents = events.filter((entry) => entry.data.featured).slice(0, 3)
           వృద్ధులు, అనాధలు, దివ్యాంగ పిల్లలు, అవసరంలో ఉన్నవారికి ఆహారం, ఆశ్రయం, సంరక్షణ.
         </p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href="/donate" class="inline-flex items-center justify-center rounded-md bg-saffron-500 px-6 py-3 text-sm font-extrabold text-ink transition hover:bg-saffron-100">
+          <a href={withBase("/donate")} class="inline-flex items-center justify-center rounded-md bg-saffron-500 px-6 py-3 text-sm font-extrabold text-ink transition hover:bg-saffron-100">
             Donate now
           </a>
-          <a href="/sponsor-a-day" class="inline-flex items-center justify-center rounded-md border border-white/40 px-6 py-3 text-sm font-extrabold text-white transition hover:bg-white/10">
+          <a href={withBase("/sponsor-a-day")} class="inline-flex items-center justify-center rounded-md border border-white/40 px-6 py-3 text-sm font-extrabold text-white transition hover:bg-white/10">
             Sponsor food for a day
           </a>
         </div>
@@ -112,7 +113,7 @@ const featuredEvents = events.filter((entry) => entry.data.featured).slice(0, 3)
           <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-leaf-700">Latest activities</p>
           <h2 class="mt-3 text-4xl font-black text-ink">Recent service stories</h2>
         </div>
-        <a href="/events" class="text-sm font-extrabold text-leaf-700 underline">View all events</a>
+        <a href={withBase("/events")} class="text-sm font-extrabold text-leaf-700 underline">View all events</a>
       </div>
       <div class="mt-8 grid gap-6 md:grid-cols-3">
         {featuredEvents.map((event) => (
@@ -149,7 +150,7 @@ const featuredEvents = events.filter((entry) => entry.data.featured).slice(0, 3)
         ))}
         <div class="grid gap-3 sm:grid-cols-2">
           {certificates.slice(0, 2).map((certificate) => (
-            <a href="/certificates" class="rounded-lg border border-ink/10 p-4 text-sm font-extrabold text-leaf-700 hover:bg-leaf-50">
+            <a href={withBase("/certificates")} class="rounded-lg border border-ink/10 p-4 text-sm font-extrabold text-leaf-700 hover:bg-leaf-50">
               {certificate.data.title.en}
             </a>
           ))}

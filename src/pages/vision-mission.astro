@@ -1,6 +1,7 @@
 ---
 import { getEntry } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { withBase } from "../lib/url";
 
 const page = await getEntry("pages", "vision-mission");
 const { Content } = await page!.render();
@@ -8,7 +9,7 @@ const { Content } = await page!.render();
 
 <BaseLayout title="Vision & Mission | Seetayya Foundation" description={page!.data.description.en} image={page!.data.heroImage}>
   <section class="relative overflow-hidden bg-ink text-white">
-    <img src={page!.data.heroImage} alt="Daily care at Seetayya Foundation" class="absolute inset-0 h-full w-full object-cover opacity-35" />
+    <img src={withBase(page!.data.heroImage)} alt="Daily care at Seetayya Foundation" class="absolute inset-0 h-full w-full object-cover opacity-35" />
     <div class="container-pad relative py-20">
       <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-saffron-100">Vision & Mission</p>
       <h1 class="mt-3 max-w-3xl text-5xl font-black leading-tight">{page!.data.title.en}</h1>

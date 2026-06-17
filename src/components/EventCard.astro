@@ -1,4 +1,6 @@
 ---
+import { withBase } from "../lib/url";
+
 interface Localized {
   en: string;
   te?: string;
@@ -22,9 +24,9 @@ const dateText = date.toLocaleDateString("en-IN", {
 ---
 
 <article class="group overflow-hidden rounded-lg border border-ink/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
-  <a href={href} class="block">
+  <a href={withBase(href)} class="block">
     <div class="aspect-[4/3] overflow-hidden bg-leaf-50">
-      <img src={image} alt={title.en} loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+      <img src={withBase(image)} alt={title.en} loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
     </div>
     <div class="space-y-3 p-5">
       <div class="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-wide text-leaf-700">

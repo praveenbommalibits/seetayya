@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { withBase } from "../lib/url";
 ---
 
 <BaseLayout title="Special School & Rehabilitation Center | Seetayya Foundation" description="A dedicated programme for mentally challenged and differently abled children, focused on care, dignity, routines, and community support." image="/uploads/events/residents-care.jpg">
@@ -13,7 +14,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
           This page replaces the old WordPress rehabilitation page with a clearer, responsive presentation. Staff can add photos and updates through events and albums while keeping personal child information private.
         </p>
       </div>
-      <img src="/uploads/events/residents-care.jpg" alt="Care support at Seetayya Foundation" class="rounded-lg object-cover shadow-soft" />
+      <img src={withBase("/uploads/events/residents-care.jpg")} alt="Care support at Seetayya Foundation" class="rounded-lg object-cover shadow-soft" />
     </div>
   </section>
   <section class="py-16">

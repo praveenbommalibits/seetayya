@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { withBase } from "../lib/url";
 ---
 
 <BaseLayout title="Videos | Seetayya Foundation" description="Video updates from Seetayya Foundation.">
@@ -8,7 +9,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
       <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-leaf-700">Videos</p>
       <h1 class="mt-3 text-5xl font-black text-ink">Video gallery</h1>
       <p class="mt-5 text-lg leading-8 text-ink/72">For static hosting, upload videos to YouTube and embed selected videos here. This avoids large video files in the repository.</p>
-      <a href="/media" class="mt-8 inline-flex rounded-md bg-leaf-700 px-5 py-3 text-sm font-extrabold text-white">View photo albums</a>
+      <a href={withBase("/media")} class="mt-8 inline-flex rounded-md bg-leaf-700 px-5 py-3 text-sm font-extrabold text-white">View photo albums</a>
     </div>
   </section>
 </BaseLayout>

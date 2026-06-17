@@ -1,6 +1,7 @@
 ---
 import { getEntry } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { withBase } from "../lib/url";
 
 const page = await getEntry("pages", "about");
 const { Content } = await page!.render();
@@ -17,7 +18,7 @@ const { Content } = await page!.render();
           <Content />
         </div>
       </div>
-      <img src={page!.data.heroImage} alt="Seetayya Foundation founders and service story" class="rounded-lg object-cover shadow-soft" />
+      <img src={withBase(page!.data.heroImage)} alt="Seetayya Foundation founders and service story" class="rounded-lg object-cover shadow-soft" />
     </div>
   </section>
   <section class="py-16">

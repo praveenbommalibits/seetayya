@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { withBase } from "../../lib/url";
 
 const albums = (await getCollection("albums"))
   .filter((entry) => entry.data.published)
@@ -18,9 +19,9 @@ const albums = (await getCollection("albums"))
   <section class="py-16">
     <div class="container-pad grid gap-6 md:grid-cols-2">
       {albums.map((album) => (
-        <a href={`/media/${album.slug}`} class="group overflow-hidden rounded-lg border border-ink/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
+        <a href={withBase(`/media/${album.slug}`)} class="group overflow-hidden rounded-lg border border-ink/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
           <div class="aspect-[16/10] overflow-hidden bg-leaf-50">
-            <img src={album.data.coverImage} alt={album.data.title.en} loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+            <img src={withBase(album.data.coverImage)} alt={album.data.title.en} loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
           </div>
           <div class="p-6">
             <p class="text-sm font-extrabold uppercase tracking-wide text-leaf-700">{album.data.category}</p>
