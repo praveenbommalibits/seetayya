@@ -1,6 +1,6 @@
 {
   "receiptNote": {
-    "en": "The old website used a GiveWP/Razorpay donation flow. No verified public UPI ID, QR code, bank account, or reusable payment link was exposed in the old content reviewed for this rebuild. For donation support, contact seetayyafoundation1@gmail.com or call +91 9490596331 / +91 7386374850.",
-    "te": "పాత వెబ్‌సైట్‌లో GiveWP/Razorpay దానం విధానం ఉంది. ఈ పునర్నిర్మాణం కోసం పరిశీలించిన పాత కంటెంట్‌లో ధృవీకరించిన పబ్లిక్ UPI ID, QR కోడ్, బ్యాంక్ ఖాతా లేదా చెల్లింపు లింక్ కనిపించలేదు."
+    "en": "The existing website uses a GiveWP/Razorpay donation flow. No verified public UPI ID, UPI QR screenshot, or bank account details were found in the public pages reviewed for this rebuild. For donation support, contact seetayyafoundation1@gmail.com or call +91 9490596331 / +91 7386374850.",
+    "te": "ప్రస్తుత వెబ్‌సైట్‌లో GiveWP/Razorpay దానం విధానం ఉంది. ఈ పునర్నిర్మాణం కోసం పరిశీలించిన పబ్లిక్ పేజీలలో ధృవీకరించిన UPI ID, UPI QR స్క్రీన్‌షాట్ లేదా బ్యాంక్ ఖాతా వివరాలు కనిపించలేదు."
   }
 }

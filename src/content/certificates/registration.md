@@ -3,6 +3,8 @@ title:
   en: "Foundation Registration"
   te: "ఫౌండేషన్ నమోదు"
 issuer: "Government or relevant registration authority"
+image: "/uploads/certificates/foundation-registration.png"
+file: "/uploads/certificates/foundation-registration.png"
 published: true
 ---
 
