@@ -3,7 +3,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 
 const base = process.env.ASTRO_BASE ?? "/";
-const site = process.env.ASTRO_SITE ?? "https://seetayya-foundation-static.vercel.app";
+const site = process.env.ASTRO_SITE ?? "https://praveenbommalibits.github.io";
 
 export default defineConfig({
   site,

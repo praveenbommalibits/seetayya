@@ -21,7 +21,7 @@ collections:
     fields:
       - { label: English Title, name: title.en, widget: string }
       - { label: Telugu Title, name: title.te, widget: string, required: false }
-      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
       - { label: Category, name: category, widget: string }
       - { label: Location, name: location, widget: string }
       - { label: English Summary, name: summary.en, widget: text }
@@ -47,7 +47,7 @@ collections:
     format: frontmatter
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
       - { label: Sponsor Name, name: sponsorName, widget: string }
       - { label: Occasion, name: occasion, widget: string }
       - { label: Meal Type, name: mealType, widget: string }
@@ -72,7 +72,7 @@ collections:
     fields:
       - { label: English Title, name: title.en, widget: string }
       - { label: Telugu Title, name: title.te, widget: string, required: false }
-      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
       - { label: Category, name: category, widget: string }
       - { label: Cover Image, name: coverImage, widget: image }
       - { label: English Summary, name: summary.en, widget: text }
@@ -113,7 +113,7 @@ collections:
       - { label: Telugu Title, name: title.te, widget: string, required: false }
       - { label: Issuer, name: issuer, widget: string }
       - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
-      - { label: Document File, name: file, widget: file }
+      - { label: Document File, name: file, widget: file, required: false }
       - { label: Preview Image, name: image, widget: image, required: false }
       - { label: Published, name: published, widget: boolean, default: true }
 
@@ -126,13 +126,13 @@ collections:
         format: json
         fields:
           - { label: Razorpay Payment Link, name: razorpayPaymentLink, widget: string, required: false }
-          - { label: UPI ID, name: upiId, widget: string }
-          - { label: UPI Name, name: upiName, widget: string }
-          - { label: Bank Name, name: bankName, widget: string }
-          - { label: Account Name, name: accountName, widget: string }
-          - { label: Account Number, name: accountNumber, widget: string }
-          - { label: IFSC, name: ifsc, widget: string }
-          - { label: QR Image, name: qrImage, widget: image }
+          - { label: UPI ID, name: upiId, widget: string, required: false }
+          - { label: UPI Name, name: upiName, widget: string, required: false }
+          - { label: Bank Name, name: bankName, widget: string, required: false }
+          - { label: Account Name, name: accountName, widget: string, required: false }
+          - { label: Account Number, name: accountNumber, widget: string, required: false }
+          - { label: IFSC, name: ifsc, widget: string, required: false }
+          - { label: QR Image, name: qrImage, widget: image, required: false }
           - { label: English Receipt Note, name: receiptNote.en, widget: text }
           - { label: Telugu Receipt Note, name: receiptNote.te, widget: text, required: false }
 

@@ -10,13 +10,13 @@ interface Props {
   href: string;
   title: Localized;
   summary: Localized;
-  date: Date;
+  date?: Date;
   category: string;
   image: string;
 }
 
 const { href, title, summary, date, category, image } = Astro.props;
-const dateText = date.toLocaleDateString("en-IN", {
+const dateText = date?.toLocaleDateString("en-IN", {
   day: "numeric",
   month: "short",
   year: "numeric"
@@ -31,8 +31,12 @@ const dateText = date.toLocaleDateString("en-IN", {
     <div class="space-y-3 p-5">
       <div class="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-wide text-leaf-700">
         <span>{category}</span>
-        <span aria-hidden="true">/</span>
-        <time datetime={date.toISOString()}>{dateText}</time>
+        {date && (
+          <>
+            <span aria-hidden="true">/</span>
+            <time datetime={date.toISOString()}>{dateText}</time>
+          </>
+        )}
       </div>
       <h3 class="text-xl font-extrabold leading-tight text-ink">{title.en}</h3>
       {title.te && <p class="telugu text-sm font-semibold text-ink/70">{title.te}</p>}

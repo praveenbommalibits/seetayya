@@ -2,14 +2,13 @@
 title:
   en: "Founders Story"
   te: "స్థాపకుల కథ"
-date: 2025-07-12
 summary:
-  en: "The foundation carries forward the values of late Sri Gulla Seetayya garu through service to elders, orphans, and people in need."
-  te: "శ్రీ గుల్ల సీతయ్య గారి సేవా విలువలను వృద్ధులు, అనాధలు, అవసరంలో ఉన్నవారికి సేవగా కొనసాగిస్తున్నారు."
+  en: "Gulla Ramesh and Gulla Mohanarao, sons of late Sri Gulla Seetayya garu, founded the service by donating land and constructing buildings with donor support."
+  te: "దివంగత శ్రీ గుళ్ల సీతయ్య గారి కుమారులు గుళ్ల రమేష్ మరియు గుళ్ల మోహనరావు భూమి దానం చేసి, దాతల సహకారంతో భవనాలు నిర్మించి సేవ ప్రారంభించారు."
 coverImage: "/uploads/events/founders.jpg"
 published: true
 ---
 
-Gulla Ramesh and Gulla Mohanarao, sons of late Sri Gulla Seetayya garu, shaped the foundation around a simple promise: people who have no dependable support should still receive dignity, food, shelter, and care.
+Gulla Ramesh and Gulla Mohanarao, sons of late Sri Gulla Seetayya garu, started this service work while running their business in Sompeta village. From their hard-earned savings, they bought land and decided to donate part of it to serve elderly people living as orphans and orphaned people in need.
 
-The renovated website presents this story with clarity and warmth, while keeping daily updates easy for the foundation team.
+With the help of donations and donor support, two buildings were constructed: Seetayya Foundation Vanaprastha Ashramam and Seetayya Foundation Nityannadana Nilayam.

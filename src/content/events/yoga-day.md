@@ -1,21 +1,20 @@
 ---
 title:
-  en: "Yoga Day at Seetayya Foundation"
-  te: "సీతయ్య ఫౌండేషన్‌లో యోగా దినోత్సవం"
-date: 2025-07-12
+  en: "Yoga Day Celebrations"
+  te: "యోగా దినోత్సవ వేడుకలు"
 category: "Wellness"
-location: "Foundation campus"
+location: "Seetayya Foundation"
 summary:
-  en: "A wellness session for residents and visitors focused on movement, calm breathing, and healthy daily habits."
-  te: "నివాసులు మరియు సందర్శకుల కోసం యోగా, శ్వాసాభ్యాసం, ఆరోగ్యకరమైన అలవాట్లపై కార్యక్రమం నిర్వహించారు."
+  en: "The old homepage highlights Yoga Day celebrations at Seetayya Foundation."
+  te: "పాత వెబ్‌సైట్‌లో సీతయ్య ఫౌండేషన్‌లో యోగా దినోత్సవ వేడుకలు హైలైట్ చేయబడ్డాయి."
 coverImage: "/uploads/events/yoga-day.jpg"
 photos:
   - src: "/uploads/events/yoga-day.jpg"
-    alt: "Yoga Day programme with residents and volunteers"
-    caption: "Wellness activities on the foundation campus."
+    alt: "Yoga Day celebrations at Seetayya Foundation"
+    caption: "Yoga Day celebrations at Seetayya Foundation."
 sponsors: []
 featured: true
 published: true
 ---
 
-Yoga Day created a gentle space for residents to participate in guided movement and breathing exercises. Small wellness programmes like this help the home keep care practical, human, and consistent.
+The old homepage lists "Yoga Day Celebrations" at Seetayya Foundation.

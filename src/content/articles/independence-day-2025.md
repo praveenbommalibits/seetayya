@@ -3,19 +3,10 @@ title:
   en: "Seetayya Foundation Celebrates 79th Independence Day"
   te: "సీతయ్య ఫౌండేషన్ 79వ స్వాతంత్ర్య దినోత్సవం"
 date: 2025-08-15
-category: "Community Event"
-location: "Seetayya Foundation old age home"
 summary:
   en: "Senior residents, students from Sompeta TDR Coaching Center, and volunteers joined the 79th Independence Day celebration at the old age home."
-  te: "వృద్ధాశ్రమంలో నివాసులు, సోంపేట TDR కోచింగ్ సెంటర్ విద్యార్థులు, వాలంటీర్లు కలిసి 79వ స్వాతంత్ర్య దినోత్సవం జరుపుకున్నారు."
+  te: "వృద్ధాశ్రమంలో నివాసులు, సోంపేట TDR కోచింగ్ సెంటర్ విద్యార్థులు, వాలంటీర్లు కలిసి 79వ స్వాతంత్ర్య దినోత్సవ వేడుకల్లో పాల్గొన్నారు."
 coverImage: "/uploads/events/independence-day.jpg"
-photos:
-  - src: "/uploads/events/independence-day.jpg"
-    alt: "Independence Day celebration at Seetayya Foundation"
-    caption: "79th Independence Day celebration highlighted on the old Articles page."
-sponsors:
-  - "Sompeta TDR Coaching Center students and volunteers"
-featured: true
 published: true
 ---
 

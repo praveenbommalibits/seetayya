@@ -9,5 +9,5 @@ note:
 photos:
   - src: "/uploads/events/independence-day.jpg"
     alt: "Independence Day sponsor meal"
-published: true
+published: false
 ---

@@ -9,5 +9,5 @@ note:
 photos:
   - src: "/uploads/events/founders.jpg"
     alt: "Founders story image"
-published: true
+published: false
 ---

@@ -5,7 +5,7 @@ import EventCard from "@components/EventCard.astro";
 
 const events = (await getCollection("events"))
   .filter((entry) => entry.data.published)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  .sort((a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0));
 ---
 
 <BaseLayout title="Events | Seetayya Foundation" description="Recent Seetayya Foundation events, health camps, awareness programmes, service activities, and celebrations.">

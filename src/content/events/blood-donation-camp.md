@@ -6,17 +6,17 @@ date: 2025-07-13
 category: "Health Camp"
 location: "Sompeta area"
 summary:
-  en: "A lifesaving blood donation camp organized with local volunteers and health partners."
-  te: "సేవకులు మరియు ఆరోగ్య భాగస్వాములతో కలిసి ప్రాణరక్షక రక్తదాన శిబిరం నిర్వహించారు."
+  en: "The old homepage highlights a Mega Blood Donation Camp dedicated to lifesavers, organized by Seetayya Foundation and Helping Hands."
+  te: "సీతయ్య ఫౌండేషన్ మరియు Helping Hands ఆధ్వర్యంలో ప్రాణదాతలకు అంకితంగా మెగా రక్తదాన శిబిరం నిర్వహించబడింది."
 coverImage: "/uploads/events/blood-camp.jpg"
 photos:
   - src: "/uploads/events/blood-camp.jpg"
-    alt: "Blood donation camp organized by Seetayya Foundation"
-    caption: "Community health support through blood donation."
+    alt: "Mega Blood Donation Camp"
+    caption: "Mega Blood Donation Camp organized by Seetayya Foundation and Helping Hands."
 sponsors:
   - "Helping Hands"
 featured: true
 published: true
 ---
 
-The blood donation camp reflects the foundation’s broader role in the community: not only caring for residents inside the home, but also mobilizing people around public health and emergency support.
+The old homepage lists this activity as "Mega Blood Donation Camp - Dedicated to Lifesavers - Organized by Seetayya Foundation & Helping Hands."

@@ -9,5 +9,5 @@ note:
 photos:
   - src: "/uploads/events/residents-care.jpg"
     alt: "Residents receiving care at Seetayya Foundation"
-published: true
+published: false
 ---

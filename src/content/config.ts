@@ -15,7 +15,7 @@ const events = defineCollection({
   type: "content",
   schema: z.object({
     title: localizedText,
-    date: z.coerce.date(),
+    date: z.coerce.date().optional(),
     category: z.string(),
     location: z.string(),
     summary: localizedText,
@@ -44,7 +44,7 @@ const albums = defineCollection({
   type: "content",
   schema: z.object({
     title: localizedText,
-    date: z.coerce.date(),
+    date: z.coerce.date().optional(),
     category: z.string(),
     coverImage: z.string(),
     summary: localizedText,
@@ -57,7 +57,7 @@ const articles = defineCollection({
   type: "content",
   schema: z.object({
     title: localizedText,
-    date: z.coerce.date(),
+    date: z.coerce.date().optional(),
     summary: localizedText,
     coverImage: z.string().optional(),
     published: z.boolean().default(true)
@@ -70,7 +70,7 @@ const certificates = defineCollection({
     title: localizedText,
     issuer: z.string(),
     date: z.coerce.date().optional(),
-    file: z.string(),
+    file: z.string().optional(),
     image: z.string().optional(),
     published: z.boolean().default(true)
   })
@@ -101,13 +101,13 @@ const donationSettings = defineCollection({
   type: "data",
   schema: z.object({
     razorpayPaymentLink: z.string().url().optional(),
-    upiId: z.string(),
-    upiName: z.string(),
-    bankName: z.string(),
-    accountName: z.string(),
-    accountNumber: z.string(),
-    ifsc: z.string(),
-    qrImage: z.string(),
+    upiId: z.string().optional(),
+    upiName: z.string().optional(),
+    bankName: z.string().optional(),
+    accountName: z.string().optional(),
+    accountNumber: z.string().optional(),
+    ifsc: z.string().optional(),
+    qrImage: z.string().optional(),
     receiptNote: localizedText
   })
 });
