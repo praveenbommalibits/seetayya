@@ -1,0 +1,85 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import StatBand from "../../components/StatBand.astro";
+import TrustBadge from "../../components/TrustBadge.astro";
+import { localizePath, text } from "../../lib/i18n";
+import { withBase } from "../../lib/url";
+import { locales, pageMeta, siteMeta, type Locale } from "../../data/site";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale }, props: { locale } }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
+---
+
+<BaseLayout title={`${text(pageMeta.about.title, locale)} | ${siteMeta.name}`} description={text(pageMeta.about.description, locale)} locale={locale} path={`/${locale}/about`} image="/uploads/events/founders.jpg">
+  <section class="section-pad bg-white">
+    <div class="container-pad grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+      <div>
+        <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-terracotta-700">{locale === "te" ? "మా గురించి" : "About us"}</p>
+        <h1 class="mt-3 text-5xl font-black leading-tight text-ink">{text(pageMeta.about.title, locale)}</h1>
+        <p class="telugu mt-4 text-lg font-semibold text-leaf-700">{text(siteMeta.dharmaLine, locale)}</p>
+        <div class="mt-6 space-y-5 text-lg leading-8 text-ink/72">
+          <p>
+            {locale === "te"
+              ? "దివంగత శ్రీ గుళ్ల సీతయ్య గారి కుమారులు గుళ్ల రమేష్ మరియు గుళ్ల మోహనరావు సోంపేట గ్రామంలో వ్యాపారం చేస్తూ, తమ కష్టార్జిత సంపాదనతో భూమి కొనుగోలు చేశారు. దక్షత లేని వయోవృద్ధులు, అనాధలకు సేవ చేయాలనే సదుద్దేశంతో ఆ భూమిలో భాగాన్ని సేవకు అంకితం చేశారు."
+              : "Gulla Ramesh and Gulla Mohanarao, sons of late Sri Gulla Seetayya garu, started this service work while running their business in Sompeta village. From their hard-earned savings, they bought land and decided to donate part of it to serve elderly people living as orphans and orphaned people in need."}
+          </p>
+          <p>
+            {locale === "te"
+              ? "దాతల దాతృత్వంతో సీతయ్య ఫౌండేషన్ వానప్రస్థ ఆశ్రమం మరియు సీతయ్య ఫౌండేషన్ నిత్యాన్నదాన నిలయం అనే రెండు భవనాలు నిర్మించబడ్డాయి."
+              : "With the help of donations and donor support, two buildings were constructed: Seetayya Foundation Vanaprastha Ashramam and Seetayya Foundation Nityannadana Nilayam."}
+          </p>
+          <p>
+            {locale === "te"
+              ? "సీతయ్య ఫౌండేషన్‌లో ఆశ్రయం పొందుతున్న వయోవృద్ధులు ప్రశాంత వాతావరణంలో జీవిస్తూ మానసిక సంతోషాన్ని పొందుతున్నారు. ఇక్కడ ఆపకుండా అవసరంలో ఉన్నవారికి మరింత సేవ చేయాలని ఫౌండేషన్ ఆకాంక్షిస్తోంది."
+              : "The elderly and orphaned people staying at Seetayya Foundation are able to spend their time in a peaceful environment, and orphaned people have found a family-like place of care. The foundation says it does not want to stop here and seeks support to continue service to needy people."}
+          </p>
+        </div>
+      </div>
+      <img src={withBase("/uploads/events/founders.jpg")} alt={locale === "te" ? "సీతయ్య ఫౌండేషన్ స్థాపకుల సేవా కథ" : "Seetayya Foundation founders and service story"} class="rounded-lg object-cover shadow-soft" />
+    </div>
+  </section>
+
+  <StatBand locale={locale} />
+
+  <section class="section-pad">
+    <div class="container-pad grid gap-5 md:grid-cols-3">
+      {[
+        {
+          label: locale === "te" ? "సంరక్షణ" : "Care",
+          value: locale === "te" ? "ఆహారం, ఆశ్రయం, వైద్య సహాయం, భావోద్వేగ తోడ్పాటు." : "Daily food, shelter, medical support, and emotional care."
+        },
+        {
+          label: locale === "te" ? "గౌరవం" : "Dignity",
+          value: locale === "te" ? "ప్రతి వ్యక్తిని గౌరవంగా, కుటుంబ సభ్యులా చూడటం." : "Every person is treated with respect and family-like attention."
+        },
+        {
+          label: locale === "te" ? "పారదర్శకత" : "Transparency",
+          value: locale === "te" ? "నమోదు, సర్టిఫికెట్లు, కార్యక్రమాలు పబ్లిక్‌గా చూపబడతాయి." : "Registration, certificates, and public activities are made visible."
+        }
+      ].map((item) => <TrustBadge label={item.label} value={item.value} />)}
+    </div>
+  </section>
+
+  <section class="section-pad bg-white">
+    <div class="container-pad grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+      <div>
+        <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-leaf-700">{locale === "te" ? "లక్ష్యం" : "Mission"}</p>
+        <h2 class="mt-3 text-4xl font-black text-ink">{text(siteMeta.dharmaLine, locale)}</h2>
+      </div>
+      <div class="space-y-5 text-lg leading-8 text-ink/72">
+        <p>{text(siteMeta.serviceLine, locale)}</p>
+        <p>
+          {locale === "te"
+            ? "ఫౌండేషన్ వృద్ధులు, దివ్యాంగులు, అవసరమైన వారికి మంచి వాతావరణం, వైద్య సహాయం, అవగాహన కార్యక్రమాలు, పునరావాస దిశగా సేవలు అందించడాన్ని లక్ష్యంగా పెట్టుకుంది."
+            : "The foundation provides care, a good environment, medical support, awareness activities, and rehabilitation-oriented service for elderly and disabled people."}
+        </p>
+        <a href={localizePath(locale, "/programs")} class="inline-flex rounded-md bg-leaf-700 px-5 py-3 text-sm font-extrabold text-white transition hover:bg-leaf-900">
+          {locale === "te" ? "సేవలను చూడండి" : "Explore programmes"}
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,112 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import DonationCta from "../../../components/DonationCta.astro";
+import PhotoGrid from "../../../components/PhotoGrid.astro";
+import { formatDate, localizePath, text } from "../../../lib/i18n";
+import { withBase } from "../../../lib/url";
+import { categoryLabels, contactInfo, locales, siteMeta, type Locale } from "../../../data/site";
+
+export async function getStaticPaths() {
+  const events = (await getCollection("events")).filter((entry) => entry.data.published);
+  return locales.flatMap((locale) =>
+    events.map((event) => ({
+      params: { locale, slug: event.slug },
+      props: { locale, event }
+    }))
+  );
+}
+
+const eventBodyTe: Record<string, string[]> = {
+  "independence-day-celebration": [
+    "79వ స్వాతంత్ర్య దినోత్సవం సందర్భంగా సీతయ్య ఫౌండేషన్ వృద్ధాశ్రమంలో హృదయపూర్వక వేడుక నిర్వహించింది. నివాసులు, సోంపేట TDR కోచింగ్ సెంటర్ విద్యార్థులు, వాలంటీర్లు కలిసి పాల్గొన్నారు.",
+    "త్రివర్ణ పతాకాన్ని ఆవిష్కరించిన తరువాత ఫౌండేషన్ సభ్యులు విద్యార్థులకు విద్యా కిట్లను పంపిణీ చేశారు. స్వేచ్ఛ, విద్య, ఐక్యత స్ఫూర్తిని ఈ కార్యక్రమం గౌరవించింది."
+  ],
+  "blood-donation-camp": [
+    "సీతయ్య ఫౌండేషన్ మరియు Helping Hands ఆధ్వర్యంలో ప్రాణదాతలకు అంకితంగా మెగా రక్తదాన శిబిరం నిర్వహించబడింది.",
+    "ఆరోగ్య సేవ, సమాజ భాగస్వామ్యం, అవసరమైన వారికి సహాయం అనే ఫౌండేషన్ లక్ష్యాన్ని ఈ శిబిరం చూపించింది."
+  ],
+  "yoga-day": [
+    "సీతయ్య ఫౌండేషన్‌లో యోగా దినోత్సవ వేడుకలు నిర్వహించబడ్డాయి.",
+    "ఆరోగ్యం, ప్రశాంతత, శారీరక చురుకుదనం వృద్ధాశ్రమ సంరక్షణలో భాగమని ఈ కార్యక్రమం గుర్తుచేసింది."
+  ],
+  "legal-awareness-program": [
+    "గౌరవ సీనియర్ సివిల్ జడ్జి శ్రీ జె. శ్రీనివాసరావు గారు వయోవృద్ధులకు కల్పించిన హక్కుల గురించి వివరించిన న్యాయ అవగాహన కార్యక్రమం నిర్వహించబడింది.",
+    "వృద్ధుల గౌరవం, భద్రత, చట్టపరమైన హక్కులపై అవగాహన పెంచడం ఈ కార్యక్రమం లక్ష్యం."
+  ]
+};
+
+const { locale, event } = Astro.props as {
+  locale: Locale;
+  event: CollectionEntry<"events">;
+};
+const { Content } = await event.render();
+const category = text(categoryLabels[event.data.category] ?? { en: event.data.category, te: event.data.category }, locale);
+const dateText = formatDate(event.data.date, locale);
+const eventSchema = event.data.date
+  ? {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      name: text(event.data.title, locale),
+      startDate: event.data.date.toISOString(),
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      eventStatus: "https://schema.org/EventScheduled",
+      location: {
+        "@type": "Place",
+        name: event.data.location,
+        address: contactInfo.address.en.join(", ")
+      },
+      image: [new URL(withBase(event.data.coverImage), Astro.site ?? "https://praveenbommalibits.github.io").href],
+      organizer: {
+        "@type": "Organization",
+        name: siteMeta.name
+      },
+      description: text(event.data.summary, locale)
+    }
+  : undefined;
+---
+
+<BaseLayout title={`${text(event.data.title, locale)} | ${siteMeta.name}`} description={text(event.data.summary, locale)} locale={locale} path={`/${locale}/events/${event.slug}`} image={event.data.coverImage} structuredData={eventSchema}>
+  <section class="section-pad bg-white">
+    <div class="container-pad grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+      <div>
+        <a href={localizePath(locale, "/events")} class="text-sm font-extrabold text-leaf-700 underline">{locale === "te" ? "అన్ని కార్యక్రమాలు" : "All events"}</a>
+        <p class="mt-6 text-sm font-extrabold uppercase tracking-[0.18em] text-terracotta-700">{category}</p>
+        <h1 class="mt-3 text-5xl font-black leading-tight text-ink">{text(event.data.title, locale)}</h1>
+        <p class="mt-5 text-sm font-bold text-ink/62">
+          {dateText ? `${dateText} / ${event.data.location}` : event.data.location}
+        </p>
+        <p class="mt-5 text-lg leading-8 text-ink/72">{text(event.data.summary, locale)}</p>
+      </div>
+      <img src={withBase(event.data.coverImage)} alt={text(event.data.title, locale)} class="rounded-lg object-cover shadow-soft" />
+    </div>
+  </section>
+
+  <article class="section-pad">
+    <div class="container-pad max-w-3xl">
+      <div class="rich-content text-lg leading-8 text-ink/76">
+        {locale === "en" ? <Content /> : (eventBodyTe[event.slug] ?? [text(event.data.summary, locale)]).map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      {event.data.sponsors.length > 0 && (
+        <div class="mt-10 rounded-lg border border-saffron-100 bg-saffron-50 p-5">
+          <h2 class="text-sm font-extrabold uppercase tracking-wide text-saffron-700">{locale === "te" ? "భాగస్వాములు" : "Sponsors / Partners"}</h2>
+          <p class="mt-2 text-ink/78">{event.data.sponsors.join(", ")}</p>
+        </div>
+      )}
+    </div>
+  </article>
+
+  {event.data.photos.length > 0 && (
+    <section class="section-pad bg-white">
+      <div class="container-pad">
+        <h2 class="text-3xl font-black text-ink">{locale === "te" ? "ఫోటో గ్యాలరీ" : "Photo gallery"}</h2>
+        <div class="mt-8">
+          <PhotoGrid photos={event.data.photos} />
+        </div>
+      </div>
+    </section>
+  )}
+
+  <DonationCta compact locale={locale} />
+</BaseLayout>

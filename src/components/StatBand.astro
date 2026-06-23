@@ -1,0 +1,21 @@
+---
+import { text } from "../lib/i18n";
+import { stats, type Locale } from "../data/site";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<section class="bg-paper py-8">
+  <div class="container-pad grid gap-4 md:grid-cols-4">
+    {stats.map((stat) => (
+      <div class="rounded-lg border border-ink/10 bg-white p-5">
+        <p class="text-3xl font-black text-leaf-700">{text(stat.value, locale)}</p>
+        <p class="mt-1 text-sm font-semibold text-ink/65">{text(stat.label, locale)}</p>
+      </div>
+    ))}
+  </div>
+</section>

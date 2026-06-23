@@ -72,6 +72,10 @@ const certificates = defineCollection({
     date: z.coerce.date().optional(),
     file: z.string().optional(),
     image: z.string().optional(),
+    status: localizedText.optional(),
+    publicNumber: z.string().optional(),
+    featured: z.boolean().default(false),
+    order: z.number().default(50),
     published: z.boolean().default(true)
   })
 });
@@ -81,7 +85,38 @@ const testimonials = defineCollection({
   schema: z.object({
     name: z.string(),
     role: z.string().optional(),
+    image: z.string().optional(),
     quote: localizedText,
+    published: z.boolean().default(true)
+  })
+});
+
+const heroSlides = defineCollection({
+  type: "data",
+  schema: z.object({
+    slug: z.string(),
+    title: localizedText,
+    caption: localizedText,
+    image: z.string(),
+    alt: localizedText,
+    order: z.number().default(0),
+    published: z.boolean().default(true)
+  })
+});
+
+const stories = defineCollection({
+  type: "data",
+  schema: z.object({
+    slug: z.string(),
+    title: localizedText,
+    category: localizedText,
+    summary: localizedText,
+    image: z.string(),
+    body: z.object({
+      en: z.array(z.string()),
+      te: z.array(z.string())
+    }),
+    order: z.number().default(0),
     published: z.boolean().default(true)
   })
 });
@@ -119,6 +154,8 @@ export const collections = {
   articles,
   certificates,
   testimonials,
+  heroSlides,
+  stories,
   pages,
   donationSettings
 };

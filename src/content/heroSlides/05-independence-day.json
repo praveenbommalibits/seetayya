@@ -1,0 +1,18 @@
+{
+  "slug": "independence-day",
+  "title": {
+    "en": "Celebrations that keep residents included",
+    "te": "నివాసులను భాగస్వామ్యం చేసే వేడుకలు"
+  },
+  "caption": {
+    "en": "Public events and national-day activities bring volunteers, residents, and neighbors together.",
+    "te": "ప్రజా కార్యక్రమాలు, జాతీయ దినోత్సవాలు స్వచ్ఛంద సేవకులు, నివాసులు, పొరుగువారిని కలుపుతాయి."
+  },
+  "image": "/uploads/events/independence-day.jpg",
+  "alt": {
+    "en": "Independence Day celebration at Seetayya Foundation",
+    "te": "సీతయ్య ఫౌండేషన్‌లో స్వాతంత్ర్య దినోత్సవ వేడుక"
+  },
+  "order": 5,
+  "published": true
+}

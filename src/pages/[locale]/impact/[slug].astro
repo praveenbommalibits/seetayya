@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import DonationCta from "../../../components/DonationCta.astro";
+import { localizePath, text } from "../../../lib/i18n";
+import { withBase } from "../../../lib/url";
+import { locales, siteMeta, type Locale } from "../../../data/site";
+
+export async function getStaticPaths() {
+  const stories = (await getCollection("stories")).filter((entry) => entry.data.published);
+  return locales.flatMap((locale) =>
+    stories.map((story) => ({
+      params: { locale, slug: story.data.slug },
+      props: { locale, story }
+    }))
+  );
+}
+
+const { locale, story } = Astro.props as {
+  locale: Locale;
+  story: CollectionEntry<"stories">;
+};
+---
+
+<BaseLayout title={`${text(story.data.title, locale)} | ${siteMeta.name}`} description={text(story.data.summary, locale)} locale={locale} path={`/${locale}/impact/${story.data.slug}`} image={story.data.image}>
+  <section class="section-pad bg-white">
+    <div class="container-pad grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+      <div>
+        <a href={localizePath(locale, "/impact")} class="text-sm font-extrabold text-leaf-700 underline">{locale === "te" ? "అన్ని కథలు" : "All stories"}</a>
+        <p class="mt-6 text-sm font-extrabold uppercase tracking-[0.18em] text-terracotta-700">{text(story.data.category, locale)}</p>
+        <h1 class="mt-3 text-5xl font-black leading-tight text-ink">{text(story.data.title, locale)}</h1>
+        <p class="mt-5 text-lg leading-8 text-ink/72">{text(story.data.summary, locale)}</p>
+      </div>
+      <img src={withBase(story.data.image)} alt={text(story.data.title, locale)} class="rounded-lg object-cover shadow-soft" />
+    </div>
+  </section>
+
+  <article class="section-pad">
+    <div class="container-pad max-w-3xl">
+      <div class="rich-content text-lg leading-8 text-ink/76">
+        {story.data.body[locale].map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </div>
+  </article>
+
+  <DonationCta compact locale={locale} />
+</BaseLayout>

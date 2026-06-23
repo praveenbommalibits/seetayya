@@ -5,6 +5,12 @@ title:
 issuer: "Income Tax Department"
 image: "/uploads/certificates/12aa-certificate.jpeg"
 file: "/uploads/certificates/12aa-certificate.jpeg"
+status:
+  en: "Order for registration under Section 12AA. Registration reference: CIT(EXEMPTION) HYD/2020-21/12AA/10518. Date: 31-03-2021."
+  te: "Section 12AA కింద registration order. Registration reference: CIT(EXEMPTION) HYD/2020-21/12AA/10518. తేదీ: 31-03-2021."
+publicNumber: "CIT(EXEMPTION) HYD/2020-21/12AA/10518"
+featured: false
+order: 5
 published: true
 ---
 

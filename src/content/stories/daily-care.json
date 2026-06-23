@@ -1,0 +1,28 @@
+{
+  "slug": "daily-care",
+  "title": {
+    "en": "Daily care with a family feeling",
+    "te": "కుటుంబంలాంటి నిత్య సంరక్షణ"
+  },
+  "category": {
+    "en": "Old-age home care",
+    "te": "వృద్ధాశ్రమ సంరక్షణ"
+  },
+  "summary": {
+    "en": "Residents receive food, shelter, a peaceful environment, and emotional support through the old-age-home service.",
+    "te": "వృద్ధాశ్రమ సేవ ద్వారా నివాసులు ఆహారం, ఆశ్రయం, ప్రశాంత వాతావరణం, ఆప్యాయమైన తోడ్పాటు పొందుతున్నారు."
+  },
+  "image": "/uploads/events/residents-care.jpg",
+  "body": {
+    "en": [
+      "The old About page says elderly and orphaned people staying at Seetayya Foundation are able to spend their time in a peaceful environment and find a family-like place of care.",
+      "The foundation continues seeking support so daily food, shelter, and basic care can remain dependable."
+    ],
+    "te": [
+      "సీతయ్య ఫౌండేషన్‌లో ఆశ్రయం పొందుతున్న వృద్ధులు, అనాధలు ప్రశాంత వాతావరణంలో జీవిస్తూ కుటుంబంలాంటి సంరక్షణను పొందుతున్నారని పాత About పేజీ చెబుతుంది.",
+      "నిత్య ఆహారం, ఆశ్రయం, ప్రాథమిక సంరక్షణ నిరంతరంగా కొనసాగేందుకు ఫౌండేషన్ దాతల సహకారాన్ని కోరుతోంది."
+    ]
+  },
+  "order": 2,
+  "published": true
+}

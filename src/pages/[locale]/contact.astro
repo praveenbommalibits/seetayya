@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SocialIconLink from "../../components/SocialIconLink.astro";
+import TrustBadge from "../../components/TrustBadge.astro";
+import { text } from "../../lib/i18n";
+import { contactInfo, locales, pageMeta, siteMeta, type Locale } from "../../data/site";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale }, props: { locale } }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
+const email = contactInfo.email;
+const address = contactInfo.address[locale];
+const mapSrc = "https://www.google.com/maps?q=Mandapalli%20Sompeta%20Srikakulam%20Andhra%20Pradesh%20532292&output=embed";
+---
+
+<BaseLayout title={`${text(pageMeta.contact.title, locale)} | ${siteMeta.name}`} description={text(pageMeta.contact.description, locale)} locale={locale} path={`/${locale}/contact`}>
+  <section class="section-pad bg-white">
+    <div class="container-pad grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+      <div>
+        <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-leaf-700">{text(pageMeta.contact.title, locale)}</p>
+        <h1 class="mt-3 text-5xl font-black leading-tight text-ink">{locale === "te" ? "దానం, సేవ, సందర్శన కోసం సంప్రదించండి." : "Reach out for donations, service, or visits."}</h1>
+        <p class="mt-5 text-lg leading-8 text-ink/72">{text(pageMeta.contact.description, locale)}</p>
+        <div class="mt-8 grid gap-4">
+          <TrustBadge label={locale === "te" ? "ఫోన్" : "Phone"} value={contactInfo.phones.join(" / ")} />
+          <TrustBadge label={locale === "te" ? "ఇమెయిల్" : "Email"} value={contactInfo.email} tone="gold" />
+          <div class="rounded-lg border border-ink/10 bg-paper p-5">
+            <h2 class="text-sm font-extrabold uppercase tracking-[0.16em] text-leaf-700">{locale === "te" ? "చిరునామా" : "Address"}</h2>
+            <p class="mt-3 text-sm leading-6 text-ink/70">{address.map((line) => <span>{line}<br /></span>)}</p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            {contactInfo.social.map((item) => (
+              <SocialIconLink href={item.href} label={item.label} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div class="grid gap-6">
+        <form action={`mailto:${email}`} method="post" enctype="text/plain" class="paper-panel rounded-lg p-6">
+          <div class="grid gap-4">
+            <label class="grid gap-2 text-sm font-bold text-ink">
+              {locale === "te" ? "పేరు" : "Name"}
+              <input name="Name" required class="rounded-md border border-ink/15 px-3 py-3 font-normal" />
+            </label>
+            <label class="grid gap-2 text-sm font-bold text-ink">
+              {locale === "te" ? "ఫోన్ లేదా ఇమెయిల్" : "Phone or email"}
+              <input name="Contact" required class="rounded-md border border-ink/15 px-3 py-3 font-normal" />
+            </label>
+            <label class="grid gap-2 text-sm font-bold text-ink">
+              {locale === "te" ? "సందేశం" : "Message"}
+              <textarea name="Message" rows="6" required class="rounded-md border border-ink/15 px-3 py-3 font-normal"></textarea>
+            </label>
+            <label class="flex gap-3 text-sm leading-6 text-ink/72">
+              <input type="checkbox" required class="mt-1" />
+              <span>
+                {locale === "te" ? "నా సందేశానికి స్పందించడానికి ఫౌండేషన్ ఈ వివరాలను ఉపయోగించవచ్చని అంగీకరిస్తున్నాను." : "I consent to the foundation using these details to respond to my message."}
+              </span>
+            </label>
+            <button class="rounded-md bg-leaf-700 px-5 py-3 text-sm font-extrabold text-white transition hover:bg-leaf-900">
+              {locale === "te" ? "ఇమెయిల్ సందేశం పంపండి" : "Email message"}
+            </button>
+            <p class="text-xs leading-5 text-ink/55">
+              {locale === "te" ? "ఈ static form visitor email client ను తెరుస్తుంది; వెబ్‌సైట్ సందేశాలను నిల్వ చేయదు." : "This static form opens the visitor's email client and does not store messages on the website."}
+            </p>
+          </div>
+        </form>
+        <iframe
+          title={locale === "te" ? "సీతయ్య ఫౌండేషన్ మ్యాప్" : "Seetayya Foundation map"}
+          src={mapSrc}
+          loading="lazy"
+          class="min-h-80 w-full rounded-lg border border-ink/10 bg-white"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,11 +1,13 @@
 ---
-import { withBase } from "../lib/url";
+import { localizePath, text } from "../lib/i18n";
+import { siteMeta, ui, type Locale } from "../data/site";
 
 interface Props {
   compact?: boolean;
+  locale: Locale;
 }
 
-const { compact = false } = Astro.props;
+const { compact = false, locale } = Astro.props;
 ---
 
 <section class:list={[
@@ -14,18 +16,20 @@ const { compact = false } = Astro.props;
 ]}>
   <div class="container-pad grid gap-8 md:grid-cols-[1.3fr_0.7fr] md:items-center">
     <div>
-      <p class="text-sm font-bold uppercase tracking-[0.18em] text-saffron-100">Support daily care</p>
-      <h2 class="mt-3 text-3xl font-extrabold leading-tight md:text-4xl">Sponsor meals, medicines, and dignity for a full day.</h2>
+      <p class="text-sm font-bold uppercase tracking-[0.18em] text-saffron-100">{locale === "te" ? "నిత్య సంరక్షణకు తోడ్పాటు" : "Support daily care"}</p>
+      <h2 class="mt-3 text-3xl font-extrabold leading-tight md:text-4xl">
+        {locale === "te" ? "ఒక పూర్తి రోజు భోజనం, ఔషధాలు, గౌరవప్రద సంరక్షణకు సహాయం చేయండి." : "Sponsor meals, medicines, and dignity for a full day."}
+      </h2>
       <p class="mt-4 max-w-2xl text-white/78">
-        Your contribution helps provide food, shelter, medical support, and compassionate care for elders, orphans, and differently abled children.
+        {text(siteMeta.serviceLine, locale)}
       </p>
     </div>
     <div class="flex flex-col gap-3 sm:flex-row md:flex-col md:items-stretch">
-      <a href={withBase("/donate")} class="inline-flex items-center justify-center rounded-md bg-saffron-500 px-5 py-3 text-sm font-extrabold text-ink transition hover:bg-saffron-100">
-        Donate now
+      <a href={localizePath(locale, "/donate")} class="inline-flex items-center justify-center rounded-md bg-saffron-500 px-5 py-3 text-sm font-extrabold text-ink transition hover:bg-saffron-100">
+        {text(ui.donateNow, locale)}
       </a>
-      <a href={withBase("/sponsor-a-day")} class="inline-flex items-center justify-center rounded-md border border-white/35 px-5 py-3 text-sm font-extrabold text-white transition hover:bg-white/10">
-        Sponsor a day
+      <a href={localizePath(locale, "/sponsor-a-day")} class="inline-flex items-center justify-center rounded-md border border-white/35 px-5 py-3 text-sm font-extrabold text-white transition hover:bg-white/10">
+        {text(ui.sponsorDay, locale)}
       </a>
     </div>
   </div>

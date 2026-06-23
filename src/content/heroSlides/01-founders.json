@@ -1,0 +1,18 @@
+{
+  "slug": "founders",
+  "title": {
+    "en": "A service home built from hard-earned savings",
+    "te": "కష్టార్జితంతో నిర్మించిన సేవా గృహం"
+  },
+  "caption": {
+    "en": "The founders dedicated land near Sompeta for elders, orphaned people, and people in need.",
+    "te": "సోంపేట సమీపంలో వృద్ధులు, అనాధలు, అవసరంలో ఉన్నవారి సేవ కోసం స్థాపకులు భూమిని అంకితం చేశారు."
+  },
+  "image": "/uploads/events/founders.jpg",
+  "alt": {
+    "en": "Seetayya Foundation founders and supporters at the ashram",
+    "te": "ఆశ్రమంలో సీతయ్య ఫౌండేషన్ స్థాపకులు మరియు మద్దతుదారులు"
+  },
+  "order": 1,
+  "published": true
+}

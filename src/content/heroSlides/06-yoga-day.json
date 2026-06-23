@@ -1,0 +1,18 @@
+{
+  "slug": "yoga-day",
+  "title": {
+    "en": "Wellness programmes for body and mind",
+    "te": "శరీరం, మనసు కోసం ఆరోగ్య కార్యక్రమాలు"
+  },
+  "caption": {
+    "en": "Yoga Day and awareness sessions support dignity, health, and belonging.",
+    "te": "యోగా దినోత్సవం, అవగాహన కార్యక్రమాలు గౌరవం, ఆరోగ్యం, అనుబంధాన్ని బలోపేతం చేస్తాయి."
+  },
+  "image": "/uploads/events/yoga-day.jpg",
+  "alt": {
+    "en": "Yoga Day activity with residents and supporters",
+    "te": "నివాసులు మరియు మద్దతుదారులతో యోగా దినోత్సవ కార్యక్రమం"
+  },
+  "order": 6,
+  "published": true
+}

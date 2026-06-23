@@ -1,0 +1,41 @@
+---
+import { localizePath, text } from "../lib/i18n";
+import { contactInfo, csrInfo, type Locale } from "../data/site";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<aside class="organic-top overflow-hidden rounded-lg border border-ink/10 bg-ink p-6 text-white shadow-soft">
+  <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-saffron-100">{text(csrInfo.eyebrow, locale)}</p>
+  <h2 class="mt-3 text-3xl font-black leading-tight">{text(csrInfo.title, locale)}</h2>
+  <p class="mt-4 text-sm leading-6 text-white/76">{text(csrInfo.body, locale)}</p>
+
+  <dl class="mt-5 rounded-lg border border-white/15 bg-white/10 p-4">
+    <dt class="text-xs font-extrabold uppercase tracking-[0.16em] text-saffron-100">
+      {locale === "te" ? "CSR నమోదు సంఖ్య" : "CSR registration number"}
+    </dt>
+    <dd class="mt-2 text-lg font-black">{text(csrInfo.registrationNumber, locale)}</dd>
+  </dl>
+
+  <ul class="mt-5 grid gap-2 text-sm font-semibold text-white/82">
+    {csrInfo.projects.map((project) => (
+      <li class="flex gap-2">
+        <span class="mt-2 h-2 w-2 rounded-full bg-saffron-500" aria-hidden="true"></span>
+        <span>{text(project, locale)}</span>
+      </li>
+    ))}
+  </ul>
+
+  <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+    <a href={localizePath(locale, "/csr-partnerships")} class="inline-flex justify-center rounded-md bg-saffron-500 px-5 py-3 text-sm font-extrabold text-ink transition hover:bg-saffron-100">
+      {text(csrInfo.cta, locale)}
+    </a>
+    <a href={`mailto:${contactInfo.email}?subject=CSR%20partnership%20with%20Seetayya%20Foundation`} class="inline-flex justify-center rounded-md border border-white/25 px-5 py-3 text-sm font-extrabold text-white transition hover:bg-white/10">
+      {contactInfo.email}
+    </a>
+  </div>
+</aside>

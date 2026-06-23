@@ -5,6 +5,12 @@ title:
 issuer: "Government or relevant registration authority"
 image: "/uploads/certificates/foundation-registration.png"
 file: "/uploads/certificates/foundation-registration.png"
+status:
+  en: "Registered with Registrar of Societies, Srikakulam, Government of Andhra Pradesh. Date: 01-10-2019."
+  te: "Registrar of Societies, Srikakulam, Government of Andhra Pradesh వద్ద నమోదు. తేదీ: 01-10-2019."
+publicNumber: "440-2019"
+featured: true
+order: 1
 published: true
 ---
 

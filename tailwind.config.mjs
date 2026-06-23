@@ -16,8 +16,24 @@ export default {
           500: "#e89525",
           700: "#a76013"
         },
+        terracotta: {
+          50: "#fff1ec",
+          500: "#b65237",
+          700: "#8c3527"
+        },
+        indigo: {
+          50: "#edf0fb",
+          600: "#31406f",
+          800: "#273761"
+        },
+        sand: {
+          50: "#fffaf0",
+          100: "#f5e9d2",
+          200: "#ead5ad"
+        },
         ink: "#17201a",
-        mist: "#f7f8f5"
+        mist: "#fbf7ef",
+        paper: "#fffdf8"
       },
       fontFamily: {
         sans: [

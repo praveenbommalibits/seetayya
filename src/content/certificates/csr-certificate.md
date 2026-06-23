@@ -5,6 +5,12 @@ title:
 issuer: "Corporate Social Responsibility recognition context"
 image: "/uploads/certificates/csr-certificate.jpeg"
 file: "/uploads/certificates/csr-certificate.jpeg"
+status:
+  en: "MCA approval letter dated 21-09-2023 for undertaking CSR activities."
+  te: "CSR కార్యకలాపాల కోసం 21-09-2023 తేదీతో MCA approval letter."
+publicNumber: "CSR00059810"
+featured: true
+order: 4
 published: true
 ---
 

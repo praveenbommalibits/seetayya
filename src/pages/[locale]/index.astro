@@ -1,0 +1,261 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CertificateCard from "../../components/CertificateCard.astro";
+import CsrPartnerBlock from "../../components/CsrPartnerBlock.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import EventCard from "../../components/EventCard.astro";
+import HeroCarousel from "../../components/HeroCarousel.astro";
+import ImpactTier from "../../components/ImpactTier.astro";
+import StatBand from "../../components/StatBand.astro";
+import StoryCard from "../../components/StoryCard.astro";
+import TestimonialCard from "../../components/TestimonialCard.astro";
+import TrustBadge from "../../components/TrustBadge.astro";
+import { formatCurrency, localizePath, text } from "../../lib/i18n";
+import { withBase } from "../../lib/url";
+import {
+  categoryLabels,
+  impactTiers,
+  locales,
+  pageMeta,
+  programs,
+  siteMeta,
+  trustRegistry,
+  ui,
+  type Locale
+} from "../../data/site";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale }, props: { locale } }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
+const events = (await getCollection("events"))
+  .filter((entry) => entry.data.published)
+  .sort((a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0));
+const featuredEvents = events.filter((entry) => entry.data.featured).slice(0, 3);
+const testimonials = (await getCollection("testimonials")).filter((entry) => entry.data.published);
+const stories = (await getCollection("stories"))
+  .filter((entry) => entry.data.published)
+  .sort((a, b) => a.data.order - b.data.order);
+const heroSlides = (await getCollection("heroSlides"))
+  .filter((entry) => entry.data.published)
+  .sort((a, b) => a.data.order - b.data.order);
+const certificates = (await getCollection("certificates"))
+  .filter((entry) => entry.data.published)
+  .sort((a, b) => a.data.order - b.data.order || text(a.data.title, locale).localeCompare(text(b.data.title, locale)));
+const showcaseCertificates = certificates.filter((entry) => entry.data.featured).slice(0, 4);
+const bentoClasses = [
+  "lg:col-span-2 lg:row-span-2 min-h-[30rem]",
+  "lg:col-span-2 min-h-[18rem]",
+  "lg:col-span-1 min-h-[18rem]",
+  "lg:col-span-1 min-h-[18rem]"
+];
+---
+
+<BaseLayout
+  title={text(pageMeta.home.title, locale)}
+  description={text(pageMeta.home.description, locale)}
+  locale={locale}
+  path={`/${locale}`}
+  image="/uploads/events/founders.jpg"
+>
+  <HeroCarousel locale={locale} slides={heroSlides.map((entry) => entry.data)} />
+
+  <section class="section-pad bg-white">
+    <div class="container-pad grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+      <div data-reveal>
+        <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-terracotta-700">{locale === "te" ? "మా మూలం" : "Mission / who we serve"}</p>
+        <h2 class="mt-3 text-4xl font-black leading-tight text-ink md:text-5xl">
+          {locale === "te" ? "శ్రీ గుళ్ల సీతయ్య గారి జ్ఞాపకార్థం సేవకు అంకితం." : "A family promise turned into a service home."}
+        </h2>
+        <p class="mt-5 text-lg leading-8 text-ink/72">
+          {locale === "te"
+            ? "దివంగత శ్రీ గుళ్ల సీతయ్య గారి కుమారులు గుళ్ల రమేష్ మరియు గుళ్ల మోహనరావు తమ కష్టార్జిత సంపాదనతో సోంపేటలో భూమి కొనుగోలు చేసి, వృద్ధులు మరియు అనాధల సేవ కోసం దానిలో భాగాన్ని అంకితం చేశారు."
+            : "Gulla Ramesh and Gulla Mohanarao, sons of late Sri Gulla Seetayya garu, bought land in Sompeta from their hard-earned savings and dedicated part of it to serve elderly and orphaned people."}
+        </p>
+        <a href={localizePath(locale, "/about")} class="mt-6 inline-flex rounded-md border border-leaf-700 px-5 py-3 text-sm font-extrabold text-leaf-700 transition hover:bg-leaf-50">
+          {locale === "te" ? "మా కథ చదవండి" : "Read our story"}
+        </a>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2" data-reveal>
+        <article class="rounded-lg border border-ink/10 bg-paper p-5 shadow-sm">
+          <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-leaf-700">{locale === "te" ? "విజన్" : "Vision"}</p>
+          <h3 class="mt-3 text-2xl font-black text-ink">{locale === "te" ? "అవసరంలో ఉన్నవారికి కుటుంబంలాంటి సంరక్షణ." : "Family-like care for people in need."}</h3>
+          <p class="mt-3 text-sm leading-6 text-ink/68">{text(siteMeta.serviceLine, locale)}</p>
+        </article>
+        <article class="rounded-lg border border-ink/10 bg-paper p-5 shadow-sm">
+          <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-terracotta-700">{locale === "te" ? "మిషన్" : "Mission"}</p>
+          <h3 class="mt-3 text-2xl font-black text-ink">{text(siteMeta.dharmaLine, locale)}</h3>
+          <p class="mt-3 text-sm leading-6 text-ink/68">
+            {locale === "te"
+              ? "వానప్రస్థ ఆశ్రమం, నిత్యాన్నదానం, ఆరోగ్య శిబిరాలు, పునరావాస దిశగా సేవలను నిలకడగా కొనసాగించడం."
+              : "Sustain Vanaprastha Ashramam, Nityannadana, health camps, and rehabilitation-oriented support."}
+          </p>
+        </article>
+        <article class="rounded-lg border border-ink/10 bg-leaf-700 p-5 text-white shadow-sm sm:col-span-2">
+          <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-saffron-100">{locale === "te" ? "ఎవరికి సేవ" : "Who we serve"}</p>
+          <p class="mt-3 text-2xl font-black leading-tight">
+            {locale === "te"
+              ? "వృద్ధులు, అనాధలు, దివ్యాంగ పిల్లలు, అవసరంలో ఉన్న కుటుంబాలు."
+              : "Elders, orphaned people, differently abled children, and families in need."}
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <StatBand locale={locale} />
+
+  <section class="section-pad bg-white">
+    <div class="container-pad" data-reveal>
+      <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-leaf-700">{locale === "te" ? "సేవా కార్యక్రమాలు" : "Programs"}</p>
+          <h2 class="mt-3 text-4xl font-black text-ink">{locale === "te" ? "సేవ ఒక చోట ఆగదు" : "Service does not stay in one lane"}</h2>
+        </div>
+        <a href={localizePath(locale, "/programs")} class="text-sm font-extrabold text-leaf-700 underline">{text(ui.learnMore, locale)}</a>
+      </div>
+      <div class="mt-8 grid gap-5 lg:grid-cols-4">
+        {programs.map((program, index) => (
+          <a
+            href={localizePath(locale, `/programs#${program.id}`)}
+            class:list={[
+              "group relative overflow-hidden rounded-lg border border-ink/10 bg-ink shadow-sm transition hover:-translate-y-1 hover:shadow-soft",
+              bentoClasses[index] ?? "min-h-[18rem]"
+            ]}
+          >
+            <img src={withBase(program.image)} alt={text(program.title, locale)} loading="lazy" class="absolute inset-0 h-full w-full object-cover opacity-68 transition duration-500 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/52 to-transparent"></div>
+            <div class="absolute inset-x-0 bottom-0 p-5 md:p-6">
+              <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-saffron-100">{text(program.eyebrow, locale)}</p>
+              <h3 class="mt-3 text-2xl font-black leading-tight text-white">{text(program.title, locale)}</h3>
+              <p class="mt-3 line-clamp-4 text-sm leading-6 text-white/78">{text(program.summary, locale)}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad">
+    <div class="container-pad" data-reveal>
+      <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-terracotta-700">{locale === "te" ? "ప్రభావ కథలు" : "Impact stories"}</p>
+          <h2 class="mt-3 text-4xl font-black text-ink">{locale === "te" ? "సేవ వెనుక మనుషులు" : "The people behind the service"}</h2>
+        </div>
+        <a href={localizePath(locale, "/impact")} class="text-sm font-extrabold text-leaf-700 underline">{locale === "te" ? "అన్ని కథలు" : "All stories"}</a>
+      </div>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {stories.map((story) => <StoryCard {...story.data} locale={locale} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad bg-paper">
+    <div class="container-pad" data-reveal>
+      <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-leaf-700">{locale === "te" ? "ఇటీవలి కార్యక్రమాలు" : "Latest activities"}</p>
+          <h2 class="mt-3 text-4xl font-black text-ink">{locale === "te" ? "సమాజాన్ని కలిపే సేవ" : "Service that keeps the community connected"}</h2>
+        </div>
+        <a href={localizePath(locale, "/events")} class="text-sm font-extrabold text-leaf-700 underline">{text(ui.viewAllEvents, locale)}</a>
+      </div>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {featuredEvents.map((event) => (
+          <EventCard
+            href={`/events/${event.slug}`}
+            title={event.data.title}
+            summary={event.data.summary}
+            date={event.data.date}
+            category={text(categoryLabels[event.data.category] ?? { en: event.data.category, te: event.data.category }, locale)}
+            image={event.data.coverImage}
+            locale={locale}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad bg-white">
+    <div class="container-pad" data-reveal>
+      <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-terracotta-700">{locale === "te" ? "నమ్మకం మరియు పత్రాలు" : "Certifications and trust"}</p>
+          <h2 class="mt-3 max-w-3xl text-4xl font-black leading-tight text-ink">
+            {locale === "te" ? "దాతలు ముందుగా ధృవీకరించగలిగే స్పష్టమైన పత్రాలు." : "Clear documents donors can verify before they give."}
+          </h2>
+        </div>
+        <a href={localizePath(locale, "/transparency")} class="text-sm font-extrabold text-leaf-700 underline">{locale === "te" ? "పారదర్శకత చూడండి" : "View transparency"}</a>
+      </div>
+
+      <div class="mt-8 grid gap-8 lg:grid-cols-[1.25fr_0.75fr]">
+        <div>
+          <div class="grid gap-5 sm:grid-cols-2">
+            {showcaseCertificates.map((certificate) => (
+              <CertificateCard
+                id={certificate.slug}
+                title={certificate.data.title}
+                issuer={certificate.data.issuer}
+                image={certificate.data.image}
+                file={certificate.data.file}
+                status={certificate.data.status}
+                publicNumber={certificate.data.publicNumber}
+                locale={locale}
+              />
+            ))}
+          </div>
+          <div class="mt-5 grid gap-3 sm:grid-cols-3">
+            <TrustBadge label={text(trustRegistry.ngoDarpan.label, locale)} value={text(trustRegistry.ngoDarpan.value, locale)} tone="indigo" />
+            <TrustBadge label={text(trustRegistry.pan.label, locale)} value={text(trustRegistry.pan.value, locale)} tone="gold" />
+            <TrustBadge label={text(trustRegistry.fcra.label, locale)} value={text(trustRegistry.fcra.value, locale)} tone="terracotta" />
+          </div>
+        </div>
+        <CsrPartnerBlock locale={locale} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad">
+    <div class="container-pad" data-reveal>
+      <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-leaf-700">{locale === "te" ? "దానం ప్రభావం" : "Donation impact"}</p>
+          <h2 class="mt-3 text-4xl font-black text-ink">{locale === "te" ? "మీ సహాయం ఏం చేస్తుంది" : "What your giving can make possible"}</h2>
+        </div>
+        <a href={localizePath(locale, "/donate")} class="text-sm font-extrabold text-leaf-700 underline">{text(ui.donateNow, locale)}</a>
+      </div>
+      <div class="mt-8 grid gap-4 md:grid-cols-4">
+        {impactTiers.map((tier) => (
+          <ImpactTier {...tier} locale={locale} />
+        ))}
+      </div>
+      <p class="mt-4 text-xs font-semibold text-ink/58">
+        {locale === "te" ? "ప్రభావ మొత్తాలు సూచనాత్మకమైనవి; నిజమైన నిర్వహణ ఖర్చుల ఆధారంగా నవీకరించవచ్చు." : "Impact amounts are indicative and can be updated as real operating costs change."}
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    locale={locale}
+    eyebrow={{ en: "Sponsor daily care", te: "నిత్య సంరక్షణకు సహాయం" }}
+    title={{ en: `Sponsor a full day from ${formatCurrency(5000, locale)}.`, te: `${formatCurrency(5000, locale)}తో ఒక పూర్తి రోజు సేవకు తోడ్పడండి.` }}
+    body={{ en: "Help provide meals, medicines, shelter, and steady attention for the people staying at the foundation.", te: "ఫౌండేషన్‌లో ఆశ్రయం పొందుతున్న వారికి భోజనం, ఔషధాలు, ఆశ్రయం, నిత్య శ్రద్ధ అందించేందుకు సహాయం చేయండి." }}
+  />
+
+  {testimonials.length > 0 && (
+    <section class="section-pad bg-white">
+      <div class="container-pad" data-reveal>
+        <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-leaf-700">{locale === "te" ? "సందర్శకుల మాటలు" : "Community voices"}</p>
+        <h2 class="mt-3 text-4xl font-black text-ink">{locale === "te" ? "ప్రజలు చెప్పిన మాటలు" : "What people say"}</h2>
+        <div class="mt-6 grid gap-4 md:grid-cols-3">
+          {testimonials.slice(0, 3).map((entry) => (
+            <TestimonialCard {...entry.data} locale={locale} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>

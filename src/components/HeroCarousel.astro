@@ -1,0 +1,180 @@
+---
+import { localizePath, text } from "../lib/i18n";
+import { withBase } from "../lib/url";
+import { siteMeta, ui, type Locale, type PartialLocalizedText } from "../data/site";
+
+interface HeroSlide {
+  slug: string;
+  title: PartialLocalizedText;
+  caption: PartialLocalizedText;
+  image: string;
+  alt: PartialLocalizedText;
+}
+
+interface Props {
+  locale: Locale;
+  slides: HeroSlide[];
+}
+
+const { locale, slides } = Astro.props;
+const safeSlides = slides.length > 0 ? slides : [
+  {
+    slug: "founders-fallback",
+    title: { en: "A service home built for dignity", te: "గౌరవం కోసం నిర్మించిన సేవా గృహం" },
+    caption: siteMeta.serviceLine,
+    image: "/uploads/events/founders.jpg",
+    alt: { en: "Seetayya Foundation service gathering", te: "సీతయ్య ఫౌండేషన్ సేవా సమావేశం" }
+  }
+];
+---
+
+<section
+  class="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-ink text-white"
+  data-hero-carousel
+  tabindex="0"
+  aria-roledescription="carousel"
+  aria-label={locale === "te" ? "సీతయ్య ఫౌండేషన్ కార్యకలాపాల చిత్ర స్లైడర్" : "Seetayya Foundation activity image carousel"}
+>
+  <div class="absolute inset-0">
+    {safeSlides.map((slide, index) => (
+      <figure
+        class="absolute inset-0"
+        data-carousel-slide
+        data-active={index === 0 ? "true" : "false"}
+        data-slide-label={`${index + 1} / ${safeSlides.length}: ${text(slide.title, locale)}`}
+        aria-hidden={index === 0 ? "false" : "true"}
+      >
+        <img
+          src={withBase(slide.image)}
+          alt={text(slide.alt, locale)}
+          width="1600"
+          height="1067"
+          loading={index === 0 ? "eager" : "lazy"}
+          fetchpriority={index === 0 ? "high" : "auto"}
+          class="h-full w-full object-cover"
+        />
+        <figcaption class="sr-only">{text(slide.caption, locale)}</figcaption>
+      </figure>
+    ))}
+  </div>
+  <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(23,32,26,0.86)_0%,rgba(23,32,26,0.52)_48%,rgba(23,32,26,0.20)_100%)]"></div>
+  <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent"></div>
+
+  <div class="container-pad relative grid min-h-[calc(100svh-5rem)] items-end pb-10 pt-24 md:pb-14">
+    <div class="max-w-5xl" data-reveal>
+      <p class="text-sm font-extrabold uppercase tracking-[0.2em] text-saffron-100">{siteMeta.name}</p>
+      <h1 class="mt-4 max-w-4xl text-5xl font-black leading-[1.03] md:text-7xl">
+        {locale === "te" ? "ఆహారం, ఆశ్రయం, ఆప్యాయ సంరక్షణ." : "Food, shelter, and care with dignity."}
+      </h1>
+      <p class="telugu mt-5 max-w-2xl text-lg font-semibold text-white/90">
+        {text(siteMeta.dharmaLine, locale)} / Service is our dharma
+      </p>
+      <p class="mt-4 max-w-2xl text-lg leading-8 text-white/82">
+        {text(siteMeta.serviceLine, locale)}
+      </p>
+
+      <div class="mt-6 max-w-2xl">
+        <p data-carousel-title class="text-2xl font-black leading-tight text-saffron-100 md:text-3xl">{text(safeSlides[0].title, locale)}</p>
+        <p data-carousel-caption class="mt-2 text-base leading-7 text-white/78">{text(safeSlides[0].caption, locale)}</p>
+        <p id="hero-carousel-status" class="sr-only" aria-live="polite">{`1 / ${safeSlides.length}: ${text(safeSlides[0].title, locale)}`}</p>
+      </div>
+
+      <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+        <a href={localizePath(locale, "/donate")} class="inline-flex items-center justify-center rounded-md bg-saffron-500 px-6 py-3 text-sm font-extrabold text-ink transition hover:bg-saffron-100">
+          {text(ui.donateNow, locale)}
+        </a>
+        <a href={localizePath(locale, "/sponsor-a-day")} class="inline-flex items-center justify-center rounded-md border border-white/45 px-6 py-3 text-sm font-extrabold text-white transition hover:bg-white/10">
+          {text(ui.sponsorDay, locale)}
+        </a>
+      </div>
+
+      <div class="mt-7 flex flex-wrap items-center gap-3">
+        <div class="flex items-center gap-2" role="tablist" aria-label={locale === "te" ? "చిత్రాలు" : "Slides"}>
+          {safeSlides.map((slide, index) => (
+            <button
+              type="button"
+              data-carousel-dot={index}
+              class:list={[
+                "h-2.5 rounded-full border border-white/40 transition",
+                index === 0 ? "w-8 bg-white" : "w-2.5 bg-white/35 hover:bg-white/70"
+              ]}
+              aria-label={`${locale === "te" ? "చిత్రం" : "Slide"} ${index + 1}: ${text(slide.title, locale)}`}
+              aria-selected={index === 0 ? "true" : "false"}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline define:vars={{ slideContent: safeSlides.map((slide) => ({ title: text(slide.title, locale), caption: text(slide.caption, locale) })) }}>
+    document.querySelectorAll("[data-hero-carousel]").forEach((root) => {
+      const slides = Array.from(root.querySelectorAll("[data-carousel-slide]"));
+      const dots = Array.from(root.querySelectorAll("[data-carousel-dot]"));
+      const title = root.querySelector("[data-carousel-title]");
+      const caption = root.querySelector("[data-carousel-caption]");
+      const status = root.querySelector("#hero-carousel-status");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let index = 0;
+      let timer = null;
+      let paused = reduceMotion;
+      let touchStartX = 0;
+
+      const stop = () => {
+        if (timer) window.clearInterval(timer);
+        timer = null;
+      };
+
+      const start = () => {
+        stop();
+        if (!paused && !reduceMotion && slides.length > 1) {
+          timer = window.setInterval(() => goTo(index + 1), 6200);
+        }
+      };
+
+      const render = () => {
+        slides.forEach((slide, slideIndex) => {
+          const active = slideIndex === index;
+          slide.setAttribute("data-active", active ? "true" : "false");
+          slide.setAttribute("aria-hidden", active ? "false" : "true");
+        });
+        dots.forEach((dot, dotIndex) => {
+          const active = dotIndex === index;
+          dot.setAttribute("aria-selected", active ? "true" : "false");
+          dot.classList.toggle("w-8", active);
+          dot.classList.toggle("w-2.5", !active);
+          dot.classList.toggle("bg-white", active);
+          dot.classList.toggle("bg-white/35", !active);
+        });
+        if (title) title.textContent = slideContent[index]?.title || "";
+        if (caption) caption.textContent = slideContent[index]?.caption || "";
+        if (status) status.textContent = `${index + 1} / ${slides.length}: ${slideContent[index]?.title || ""}`;
+      };
+
+      function goTo(nextIndex, userInitiated = false) {
+        index = (nextIndex + slides.length) % slides.length;
+        render();
+        if (userInitiated) start();
+      }
+
+      dots.forEach((dot, dotIndex) => dot.addEventListener("click", () => goTo(dotIndex, true)));
+      root.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") goTo(index - 1, true);
+        if (event.key === "ArrowRight") goTo(index + 1, true);
+      });
+      root.addEventListener("mouseenter", stop);
+      root.addEventListener("mouseleave", start);
+      root.addEventListener("touchstart", (event) => {
+        touchStartX = event.changedTouches[0]?.clientX || 0;
+      }, { passive: true });
+      root.addEventListener("touchend", (event) => {
+        const touchEndX = event.changedTouches[0]?.clientX || 0;
+        const delta = touchEndX - touchStartX;
+        if (Math.abs(delta) > 45) goTo(index + (delta < 0 ? 1 : -1), true);
+      }, { passive: true });
+
+      render();
+      start();
+    });
+  </script>
+</section>

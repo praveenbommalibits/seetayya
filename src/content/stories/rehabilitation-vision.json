@@ -1,0 +1,28 @@
+{
+  "slug": "rehabilitation-vision",
+  "title": {
+    "en": "A rehabilitation vision for children",
+    "te": "పిల్లల పునరావాసం కోసం ఒక దృష్టి"
+  },
+  "category": {
+    "en": "Future project",
+    "te": "భవిష్యత్ ప్రాజెక్ట్"
+  },
+  "summary": {
+    "en": "The foundation is planning a special school and rehabilitation center for differently abled children in the foundation premises.",
+    "te": "ఫౌండేషన్ ప్రాంగణంలో దివ్యాంగ పిల్లల కోసం ప్రత్యేక పాఠశాల మరియు పునరావాస కేంద్రాన్ని ఫౌండేషన్ ప్రతిపాదిస్తోంది."
+  },
+  "image": "/uploads/events/yoga-day.jpg",
+  "body": {
+    "en": [
+      "The old project page describes a need for dedicated support as elderly people, orphaned people, mentally challenged people, and differently abled people continue reaching the ashram.",
+      "The new project asks donors to participate in constructing a center with special facilities for differently abled children."
+    ],
+    "te": [
+      "వృద్ధులు, అనాధలు, మానసిక వికలాంగులు, దివ్యాంగులు ఆశ్రమానికి చేరుతున్నందున ప్రత్యేక సహాయం అవసరమని పాత ప్రాజెక్ట్ పేజీ వివరిస్తుంది.",
+      "దివ్యాంగ పిల్లల కోసం ప్రత్యేక సదుపాయాలతో కూడిన కేంద్రం నిర్మాణంలో దాతలు భాగస్వామ్యం కావాలని ఈ ప్రాజెక్ట్ కోరుతోంది."
+    ]
+  },
+  "order": 3,
+  "published": true
+}

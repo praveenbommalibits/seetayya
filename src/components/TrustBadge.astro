@@ -1,0 +1,20 @@
+---
+interface Props {
+  label: string;
+  value: string;
+  tone?: "green" | "gold" | "indigo" | "terracotta";
+}
+
+const { label, value, tone = "green" } = Astro.props;
+const toneClass = {
+  green: "border-leaf-700/20 bg-leaf-50 text-leaf-900",
+  gold: "border-saffron-500/25 bg-saffron-50 text-ink",
+  indigo: "border-indigo-600/20 bg-indigo-50 text-indigo-800",
+  terracotta: "border-terracotta-500/25 bg-terracotta-50 text-terracotta-700"
+}[tone];
+---
+
+<div class:list={["rounded-lg border p-4", toneClass]}>
+  <p class="text-xs font-extrabold uppercase tracking-[0.16em] opacity-75">{label}</p>
+  <p class="mt-2 text-base font-black leading-tight">{value}</p>
+</div>

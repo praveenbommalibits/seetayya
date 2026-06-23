@@ -1,0 +1,28 @@
+{
+  "slug": "founders-story",
+  "title": {
+    "en": "A home built from hard-earned savings",
+    "te": "కష్టార్జితంతో నిర్మించిన సేవా గృహం"
+  },
+  "category": {
+    "en": "Founders' story",
+    "te": "స్థాపకుల కథ"
+  },
+  "summary": {
+    "en": "Gulla Ramesh and Gulla Mohanarao, sons of late Sri Gulla Seetayya garu, bought land in Sompeta and donated part of it for service to elders and orphaned people.",
+    "te": "దివంగత శ్రీ గుళ్ల సీతయ్య గారి కుమారులు గుళ్ల రమేష్, గుళ్ల మోహనరావు సోంపేటలో భూమి కొనుగోలు చేసి, వృద్ధులు మరియు అనాధల సేవ కోసం దానిలో భాగాన్ని దానం చేశారు."
+  },
+  "image": "/uploads/events/founders.jpg",
+  "body": {
+    "en": [
+      "The foundation began from a family decision to turn hard-earned savings into lasting service. While running their business in Sompeta village, the brothers chose to dedicate land and support to people who needed shelter, food, and dignity.",
+      "With the help of donations and donor support, two buildings were constructed: Seetayya Foundation Vanaprastha Ashramam and Seetayya Foundation Nityannadana Nilayam."
+    ],
+    "te": [
+      "కష్టార్జిత సంపాదనను నిలకడైన సేవగా మార్చాలనే కుటుంబ నిర్ణయం నుంచే ఫౌండేషన్ ప్రారంభమైంది. సోంపేట గ్రామంలో వ్యాపారం చేస్తూ, ఆశ్రయం, ఆహారం, గౌరవం అవసరమైన వారికి భూమి మరియు సహాయాన్ని అంకితం చేయాలని సోదరులు నిర్ణయించారు.",
+      "దాతల సహకారంతో సీతయ్య ఫౌండేషన్ వానప్రస్థ ఆశ్రమం మరియు సీతయ్య ఫౌండేషన్ నిత్యాన్నదాన నిలయం అనే రెండు భవనాలు నిర్మించబడ్డాయి."
+    ]
+  },
+  "order": 1,
+  "published": true
+}

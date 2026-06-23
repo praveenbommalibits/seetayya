@@ -102,6 +102,64 @@ collections:
       - { label: Published, name: published, widget: boolean, default: true }
       - { label: Body, name: body, widget: markdown }
 
+  - name: stories
+    label: Impact Stories
+    folder: src/content/stories
+    create: true
+    format: json
+    slug: "{{slug}}"
+    fields:
+      - { label: Slug, name: slug, widget: string }
+      - { label: English Title, name: title.en, widget: string }
+      - { label: Telugu Title, name: title.te, widget: string }
+      - { label: English Category, name: category.en, widget: string }
+      - { label: Telugu Category, name: category.te, widget: string }
+      - { label: English Summary, name: summary.en, widget: text }
+      - { label: Telugu Summary, name: summary.te, widget: text }
+      - { label: Image, name: image, widget: image }
+      - label: English Body Paragraphs
+        name: body.en
+        widget: list
+        field: { label: Paragraph, name: paragraph, widget: text }
+      - label: Telugu Body Paragraphs
+        name: body.te
+        widget: list
+        field: { label: Paragraph, name: paragraph, widget: text }
+      - { label: Sort Order, name: order, widget: number, default: 0 }
+      - { label: Published, name: published, widget: boolean, default: true }
+
+  - name: heroSlides
+    label: Homepage Hero Slides
+    folder: src/content/heroSlides
+    create: true
+    format: json
+    slug: "{{slug}}"
+    fields:
+      - { label: Slug, name: slug, widget: string }
+      - { label: English Title, name: title.en, widget: string }
+      - { label: Telugu Title, name: title.te, widget: string }
+      - { label: English Caption, name: caption.en, widget: text }
+      - { label: Telugu Caption, name: caption.te, widget: text }
+      - { label: Image, name: image, widget: image }
+      - { label: English Alt Text, name: alt.en, widget: string }
+      - { label: Telugu Alt Text, name: alt.te, widget: string }
+      - { label: Sort Order, name: order, widget: number, default: 0 }
+      - { label: Published, name: published, widget: boolean, default: true }
+
+  - name: testimonials
+    label: Testimonials
+    folder: src/content/testimonials
+    create: true
+    format: json
+    slug: "{{slug}}"
+    fields:
+      - { label: Name, name: name, widget: string }
+      - { label: Role, name: role, widget: string, required: false }
+      - { label: Photo, name: image, widget: image, required: false }
+      - { label: English Quote, name: quote.en, widget: text }
+      - { label: Telugu Quote, name: quote.te, widget: text, required: false }
+      - { label: Published, name: published, widget: boolean, default: true }
+
   - name: certificates
     label: Certificates
     folder: src/content/certificates
@@ -115,6 +173,11 @@ collections:
       - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false }
       - { label: Document File, name: file, widget: file, required: false }
       - { label: Preview Image, name: image, widget: image, required: false }
+      - { label: English Status Note, name: status.en, widget: text, required: false }
+      - { label: Telugu Status Note, name: status.te, widget: text, required: false }
+      - { label: Public Registration Number, name: publicNumber, widget: string, required: false }
+      - { label: Featured on Homepage, name: featured, widget: boolean, default: false }
+      - { label: Display Order, name: order, widget: number, default: 50, hint: "Lower numbers appear first." }
       - { label: Published, name: published, widget: boolean, default: true }
 
   - name: settings

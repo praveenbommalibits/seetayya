@@ -1,0 +1,18 @@
+{
+  "slug": "daily-care",
+  "title": {
+    "en": "Daily care, food, and companionship",
+    "te": "నిత్య సంరక్షణ, ఆహారం, ఆప్యాయత"
+  },
+  "caption": {
+    "en": "Residents receive food, shelter, and a peaceful family-like environment.",
+    "te": "నివాసులకు ఆహారం, ఆశ్రయం, కుటుంబంలాంటి ప్రశాంత వాతావరణం లభిస్తుంది."
+  },
+  "image": "/uploads/events/residents-care.jpg",
+  "alt": {
+    "en": "Residents receiving care at Seetayya Foundation",
+    "te": "సీతయ్య ఫౌండేషన్‌లో సంరక్షణ పొందుతున్న నివాసులు"
+  },
+  "order": 2,
+  "published": true
+}

@@ -1,0 +1,35 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  variant?: "light" | "soft";
+}
+
+const { href, label, variant = "soft" } = Astro.props;
+const platform = label.toLowerCase();
+const className = variant === "light"
+  ? "inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 text-white transition hover:bg-white/12"
+  : "inline-flex h-10 w-10 items-center justify-center rounded-full border border-ink/10 bg-white text-ink/70 transition hover:border-leaf-700 hover:text-leaf-700";
+---
+
+<a href={href} target="_blank" rel="noreferrer" class={className} aria-label={label} title={label}>
+  {platform === "facebook" ? (
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5" fill="currentColor">
+      <path d="M14.2 8.4V6.9c0-.7.2-1.1 1.2-1.1h1.5V3.1c-.7-.1-1.4-.2-2.2-.2-2.2 0-3.7 1.3-3.7 3.8v1.7H8.5v3h2.5v7.7h3.2v-7.7h2.5l.4-3h-2.9Z" />
+    </svg>
+  ) : platform === "youtube" ? (
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5" fill="currentColor">
+      <path d="M21 8.1a3 3 0 0 0-2.1-2.1C17 5.5 12 5.5 12 5.5s-5 0-6.9.5A3 3 0 0 0 3 8.1 31.8 31.8 0 0 0 2.5 12a31.8 31.8 0 0 0 .5 3.9A3 3 0 0 0 5.1 18c1.9.5 6.9.5 6.9.5s5 0 6.9-.5a3 3 0 0 0 2.1-2.1c.4-1.9.5-3.9.5-3.9s-.1-2-.5-3.9ZM10 15.1V8.9l5.4 3.1-5.4 3.1Z" />
+    </svg>
+  ) : platform === "x" ? (
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5" fill="currentColor">
+      <path d="M13.8 10.5 20.8 3h-1.7l-6.1 6.5L8.2 3H2.6l7.3 9.7L2.6 21h1.7l6.4-7.2 5.2 7.2h5.6l-7.7-10.5Zm-2.3 2.6-.7-1L4.9 4.3h2.5l4.8 6.5.7 1 6.2 8h-2.5l-5.1-6.7Z" />
+    </svg>
+  ) : (
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="4" y="4" width="16" height="16" rx="4" />
+      <circle cx="12" cy="12" r="3.2" />
+      <circle cx="17" cy="7" r="0.8" fill="currentColor" stroke="none" />
+    </svg>
+  )}
+</a>

@@ -1,96 +1,174 @@
 ---
 import "../styles/global.css";
+import SocialIconLink from "../components/SocialIconLink.astro";
+import { localizePath, pathWithoutLocale, text } from "../lib/i18n";
 import { withBase } from "../lib/url";
-import { contactInfo } from "../data/site";
+import {
+  contactInfo,
+  footerLinks,
+  localeLabels,
+  navItems,
+  siteMeta,
+  ui,
+  type Locale
+} from "../data/site";
 
 interface Props {
   title: string;
   description: string;
+  locale: Locale;
+  path: string;
   image?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
   title,
   description,
-  image = "/uploads/events/founders.jpg"
+  locale,
+  path,
+  image = "/uploads/events/founders.jpg",
+  structuredData
 } = Astro.props;
 
 const fallbackSite = "https://praveenbommalibits.github.io";
-const canonical = new URL(withBase(Astro.url.pathname), Astro.site ?? fallbackSite);
-const nav = [
-  { href: "/about", label: "About" },
-  { href: "/programs", label: "Programs" },
-  { href: "/events", label: "Events" },
-  { href: "/sponsor-a-day", label: "Sponsor a Day" },
-  { href: "/media", label: "Media" },
-  { href: "/donate", label: "Donate" },
-  { href: "/contact", label: "Contact" }
-];
+const cleanPath = path.replace(/\/$/, "") || `/${locale}`;
+const sectionPath = pathWithoutLocale(cleanPath);
+const canonical = new URL(withBase(cleanPath), Astro.site ?? fallbackSite);
+const alternateEn = new URL(localizePath("en", sectionPath), Astro.site ?? fallbackSite);
+const alternateTe = new URL(localizePath("te", sectionPath), Astro.site ?? fallbackSite);
+const xDefault = new URL(localizePath("en", sectionPath), Astro.site ?? fallbackSite);
+const ogImage = new URL(withBase(image), Astro.site ?? fallbackSite);
+const address = contactInfo.address[locale];
+const schema = Array.isArray(structuredData) ? structuredData : structuredData ? [structuredData] : [];
+const foundationSocials = contactInfo.social.filter((item) => item.label === "Facebook" || item.label === "Instagram");
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  name: siteMeta.name,
+  legalName: siteMeta.legalName,
+  url: new URL(withBase("/"), Astro.site ?? fallbackSite).href,
+  logo: new URL(withBase("/uploads/logo.jpg"), Astro.site ?? fallbackSite).href,
+  foundingDate: siteMeta.foundedYear,
+  identifier: siteMeta.registrationNumber,
+  email: contactInfo.email,
+  telephone: contactInfo.phones,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Near Sompeta 3 km, Mandapalli village, Kanchili zone",
+    addressLocality: "Sompeta",
+    addressRegion: "Andhra Pradesh",
+    postalCode: "532292",
+    addressCountry: "IN"
+  },
+  sameAs: contactInfo.social.map((item) => item.href)
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={alternateEn} />
+    <link rel="alternate" hreflang="te" href={alternateTe} />
+    <link rel="alternate" hreflang="x-default" href={xDefault} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(withBase(image), Astro.site ?? fallbackSite)} />
+    <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    {schema.map((item) => <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />)}
+    <script is:inline>document.documentElement.classList.add("js");</script>
   </head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:font-bold">
-      Skip to content
+      {text(ui.skip, locale)}
     </a>
 
-    <header class="sticky top-0 z-40 border-b border-ink/10 bg-mist/95 backdrop-blur">
-      <div class="container-pad flex min-h-20 items-center justify-between gap-4">
-        <a href={withBase("/")} class="flex items-center gap-3" aria-label="Seetayya Foundation home">
+    <header class="sticky top-0 z-40 border-b border-ink/10 bg-paper/95 backdrop-blur" data-site-header>
+      <div class="container-pad flex min-h-20 items-center justify-between gap-4" data-header-inner>
+        <a href={localizePath(locale)} class="flex items-center gap-3" aria-label={`${siteMeta.name} home`}>
           <img src={withBase("/uploads/logo.jpg")} alt="" class="h-12 w-12 rounded-full border border-leaf-700/15 object-cover" />
           <span class="leading-tight">
-            <span class="block text-base font-extrabold text-ink">Seetayya Foundation</span>
-            <span class="telugu block text-xs font-semibold text-leaf-700">సేవే మన ధర్మం</span>
+            <span class="block text-base font-extrabold text-ink">{siteMeta.name}</span>
+            <span class="telugu block text-xs font-semibold text-leaf-700">{text(siteMeta.dharmaLine, locale)}</span>
           </span>
         </a>
 
-        <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
-          {nav.map((item) => (
-            <a href={withBase(item.href)} class="rounded-md px-3 py-2 text-sm font-bold text-ink/78 transition hover:bg-leaf-50 hover:text-leaf-700">
-              {item.label}
-            </a>
-          ))}
+        <nav class="hidden items-center gap-1 xl:flex" aria-label="Primary navigation">
+          {navItems.map((item) => {
+            const active = sectionPath === item.path || sectionPath.startsWith(`${item.path}/`);
+            return (
+              <a
+                href={localizePath(locale, item.path)}
+                aria-current={active ? "page" : undefined}
+                class:list={[
+                  "rounded-md px-3 py-2 text-sm font-bold transition",
+                  active ? "bg-leaf-50 text-leaf-700" : "text-ink/78 hover:bg-leaf-50 hover:text-leaf-700"
+                ]}
+              >
+                {text(item.label, locale)}
+              </a>
+            );
+          })}
         </nav>
 
-        <div class="hidden items-center gap-3 lg:flex">
-          <a href={withBase("/admin")} class="rounded-md border border-ink/15 px-3 py-2 text-sm font-bold text-ink/75 transition hover:border-leaf-700 hover:text-leaf-700">
-            Admin
-          </a>
-          <a href={withBase("/donate")} class="rounded-md bg-leaf-700 px-4 py-2 text-sm font-extrabold text-white transition hover:bg-leaf-900">
-            Donate
-          </a>
-        </div>
-
-        <details class="relative lg:hidden">
-          <summary class="list-none rounded-md border border-ink/15 px-3 py-2 text-sm font-bold text-ink">
-            Menu
-          </summary>
-          <div class="absolute right-0 mt-3 w-64 rounded-lg border border-ink/10 bg-white p-3 shadow-soft">
-            <nav class="grid gap-1" aria-label="Mobile navigation">
-              {nav.map((item) => (
-                <a href={withBase(item.href)} class="rounded-md px-3 py-2 text-sm font-bold text-ink/78 hover:bg-leaf-50">
-                  {item.label}
+        <div class="flex items-center gap-2">
+          <details class="relative">
+            <summary class="inline-flex h-10 w-10 list-none items-center justify-center rounded-full border border-ink/15 bg-white text-ink transition hover:bg-leaf-50 hover:text-leaf-700" aria-label={text(ui.language, locale)} title={text(ui.language, locale)}>
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18M12 3c2.2 2.5 3.2 5.5 3.2 9s-1 6.5-3.2 9M12 3c-2.2 2.5-3.2 5.5-3.2 9s1 6.5 3.2 9" />
+              </svg>
+              <span class="sr-only">{text(ui.language, locale)}</span>
+            </summary>
+            <div class="absolute right-0 mt-3 w-36 rounded-lg border border-ink/10 bg-white p-2 shadow-soft">
+              {(["en", "te"] as const).map((itemLocale) => (
+                <a
+                  href={localizePath(itemLocale, sectionPath)}
+                  data-locale-choice={itemLocale}
+                  class:list={[
+                    "block rounded-md px-3 py-2 text-sm font-extrabold transition",
+                    itemLocale === locale ? "bg-ink text-white" : "text-ink/70 hover:bg-leaf-50 hover:text-leaf-700"
+                  ]}
+                  aria-current={itemLocale === locale ? "true" : undefined}
+                >
+                  {localeLabels[itemLocale]}
                 </a>
               ))}
-              <a href={withBase("/admin")} class="rounded-md px-3 py-2 text-sm font-bold text-ink/78 hover:bg-leaf-50">Admin</a>
-            </nav>
-          </div>
-        </details>
+            </div>
+          </details>
+
+          <a href={localizePath(locale, "/donate")} class="hidden rounded-md bg-leaf-700 px-4 py-2 text-sm font-extrabold text-white transition hover:bg-leaf-900 sm:inline-flex">
+            {text(ui.donate, locale)}
+          </a>
+
+          <details class="relative xl:hidden">
+            <summary class="list-none rounded-md border border-ink/15 px-3 py-2 text-sm font-bold text-ink">
+              {text(ui.menu, locale)}
+            </summary>
+            <div class="absolute right-0 mt-3 w-72 rounded-lg border border-ink/10 bg-white p-3 shadow-soft">
+              <nav class="grid gap-1" aria-label="Mobile navigation">
+                {navItems.map((item) => (
+                  <a href={localizePath(locale, item.path)} class="rounded-md px-3 py-2 text-sm font-bold text-ink/78 hover:bg-leaf-50">
+                    {text(item.label, locale)}
+                  </a>
+                ))}
+                <a href={localizePath(locale, "/donate")} class="rounded-md bg-leaf-700 px-3 py-2 text-sm font-extrabold text-white">
+                  {text(ui.donate, locale)}
+                </a>
+              </nav>
+            </div>
+          </details>
+        </div>
       </div>
     </header>
 
@@ -98,47 +176,86 @@ const nav = [
       <slot />
     </main>
 
-    <footer class="border-t border-ink/10 bg-white">
-      <div class="container-pad grid gap-10 py-12 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
+    <footer class="border-t border-ink/10 bg-paper">
+      <div class="container-pad grid gap-10 py-12 md:grid-cols-[1.1fr_0.9fr_0.8fr]">
         <div>
           <div class="flex items-center gap-3">
             <img src={withBase("/uploads/logo.jpg")} alt="" class="h-12 w-12 rounded-full object-cover" />
             <div>
-              <p class="font-extrabold">Seetayya Foundation</p>
-              <p class="telugu text-sm text-leaf-700">అనాధలకు, వృద్ధులకు ఆశ్రయం</p>
+              <p class="font-extrabold">{siteMeta.name}</p>
+              <p class="telugu text-sm text-leaf-700">{text(siteMeta.dharmaLine, locale)}</p>
             </div>
           </div>
           <p class="mt-4 max-w-md text-sm leading-6 text-ink/68">
-            A nonprofit service home supporting elders, orphans, differently abled children, and people in need through food, shelter, medical care, and community events.
+            {text(siteMeta.serviceLine, locale)}
           </p>
+          <p class="mt-4 text-xs font-bold uppercase tracking-wide text-terracotta-700">
+            {locale === "te" ? `నమోదు: ${siteMeta.registrationNumber}` : `Registration: ${siteMeta.registrationNumber}`}
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {foundationSocials.map((item) => (
+              <SocialIconLink href={item.href} label={item.label} />
+            ))}
+          </div>
         </div>
         <div>
-          <h2 class="text-sm font-extrabold uppercase tracking-wide text-ink">Visit</h2>
+          <h2 class="text-sm font-extrabold uppercase tracking-wide text-ink">{locale === "te" ? "చిరునామా" : "Visit"}</h2>
           <p class="mt-3 text-sm leading-6 text-ink/68">
-            {contactInfo.address.map((line) => <span>{line}<br /></span>)}
+            {address.map((line) => <span>{line}<br /></span>)}
           </p>
           <p class="mt-3 text-sm leading-6 text-ink/68">
             {contactInfo.phones.join(" / ")}<br />
             {contactInfo.email}
           </p>
-          <a href={withBase("/contact")} class="mt-3 inline-block text-sm font-bold text-leaf-700 underline">Contact the foundation</a>
+          <a href={localizePath(locale, "/contact")} class="mt-3 inline-block text-sm font-bold text-leaf-700 underline">{text(ui.contactFoundation, locale)}</a>
         </div>
         <div>
-          <h2 class="text-sm font-extrabold uppercase tracking-wide text-ink">Quick links</h2>
+          <h2 class="text-sm font-extrabold uppercase tracking-wide text-ink">{locale === "te" ? "త్వరిత లింకులు" : "Quick links"}</h2>
           <div class="mt-3 grid gap-2 text-sm font-semibold text-ink/68">
-            <a href={withBase("/privacy-policy")} class="hover:text-leaf-700">Privacy Policy</a>
-            <a href={withBase("/terms-condition")} class="hover:text-leaf-700">Terms & Condition</a>
-            <a href={withBase("/refund-cancellation")} class="hover:text-leaf-700">Refund & Cancellation</a>
-            <a href={withBase("/admin")} class="hover:text-leaf-700">Content Admin</a>
+            {footerLinks.map((item) => (
+              <a href={"global" in item && item.global ? withBase(item.path) : localizePath(locale, item.path)} class="hover:text-leaf-700">
+                {text(item.label, locale)}
+              </a>
+            ))}
           </div>
         </div>
       </div>
       <div class="border-t border-ink/10 py-5">
         <div class="container-pad flex flex-col gap-2 text-xs font-semibold text-ink/55 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Seetayya Foundation. All rights reserved.</p>
-          <p>Serving elders, orphans, differently abled children, and people in need.</p>
+          <p>© {new Date().getFullYear()} {siteMeta.name}. {locale === "te" ? "అన్ని హక్కులు రిజర్వు చేయబడ్డాయి." : "All rights reserved."}</p>
+          <p>{text(siteMeta.serviceLine, locale)}</p>
         </div>
       </div>
     </footer>
+
+    <script>
+      const header = document.querySelector("[data-site-header]");
+      const setHeaderState = () => header?.classList.toggle("is-scrolled", window.scrollY > 20);
+      setHeaderState();
+      window.addEventListener("scroll", setHeaderState, { passive: true });
+
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const revealItems = document.querySelectorAll("[data-reveal]");
+      if (reducedMotion || !("IntersectionObserver" in window)) {
+        revealItems.forEach((item) => item.classList.add("is-visible"));
+      } else {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealItems.forEach((item) => observer.observe(item));
+      }
+
+      document.querySelectorAll("[data-locale-choice]").forEach((link) => {
+        link.addEventListener("click", () => {
+          const locale = link.getAttribute("data-locale-choice");
+          if (locale) window.localStorage.setItem("seetayya-locale", locale);
+        });
+      });
+    </script>
   </body>
 </html>

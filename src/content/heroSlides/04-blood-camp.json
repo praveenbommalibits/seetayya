@@ -1,0 +1,18 @@
+{
+  "slug": "blood-camp",
+  "title": {
+    "en": "Health camps connect service with community",
+    "te": "ఆరోగ్య శిబిరాలు సేవను సమాజంతో కలుపుతాయి"
+  },
+  "caption": {
+    "en": "Blood donation, medical, eye-care, yoga, and awareness programmes extend the mission beyond the home.",
+    "te": "రక్తదానం, వైద్య, కంటి సంరక్షణ, యోగా, అవగాహన కార్యక్రమాలు సేవను ఆశ్రమం దాటి సమాజానికి తీసుకెళ్తాయి."
+  },
+  "image": "/uploads/events/blood-camp.jpg",
+  "alt": {
+    "en": "Mega blood donation camp conducted with community supporters",
+    "te": "సమాజ మద్దతుదారులతో నిర్వహించిన మెగా రక్తదాన శిబిరం"
+  },
+  "order": 4,
+  "published": true
+}

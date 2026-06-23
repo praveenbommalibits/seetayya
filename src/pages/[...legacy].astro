@@ -1,0 +1,73 @@
+---
+import { withBase } from "../lib/url";
+
+export function getStaticPaths() {
+  const redirects: Record<string, string> = {
+    "about": "/en/about",
+    "about-us": "/en/about",
+    "vision-mission": "/en/about",
+    "programs": "/en/programs",
+    "on-going-projects": "/en/programs",
+    "rehabilitation-center": "/en/programs#rehabilitation",
+    "children-rehablitation-center": "/en/programs#rehabilitation",
+    "impact": "/en/impact",
+    "events": "/en/events",
+    "events/independence-day-celebration": "/en/events/independence-day-celebration",
+    "events/blood-donation-camp": "/en/events/blood-donation-camp",
+    "events/yoga-day": "/en/events/yoga-day",
+    "events/legal-awareness-program": "/en/events/legal-awareness-program",
+    "articles": "/en/impact",
+    "articles/founders-story": "/en/impact/founders-story",
+    "articles/independence-day-2025": "/en/events/independence-day-celebration",
+    "sponsor-a-day": "/en/sponsor-a-day",
+    "donate": "/en/donate",
+    "donations": "/en/donate",
+    "donations/help-seetayya-foundation": "/en/donate",
+    "donations/donation": "/en/donate",
+    "donor-dashboard": "/en/donate",
+    "donation-confirmation": "/en/donate",
+    "donation-failed": "/en/donate",
+    "media": "/en/media",
+    "gallery": "/en/media",
+    "media/daily-care": "/en/media/daily-care",
+    "media/foundation-activities": "/en/media/foundation-activities",
+    "videos": "/en/media",
+    "certificates": "/en/transparency",
+    "our-certificates": "/en/transparency",
+    "transparency": "/en/transparency",
+    "hello-world": "/en",
+    "contact": "/en/contact",
+    "contact-us": "/en/contact",
+    "volunteer": "/en/volunteer",
+    "become-a-volunteer": "/en/volunteer",
+    "corporate-partnerships": "/en/csr-partnerships",
+    "csr": "/en/csr-partnerships",
+    "privacy-policy": "/en/privacy-policy",
+    "privacy-policy-2": "/en/privacy-policy",
+    "terms-condition": "/en/terms-condition",
+    "refund-cancellation": "/en/refund-cancellation"
+  };
+
+  return Object.keys(redirects).map((legacy) => ({
+    params: { legacy },
+    props: { legacy, target: withBase(redirects[legacy]) }
+  }));
+}
+
+const { legacy, target } = Astro.props as { legacy: string; target: string };
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <title>Redirecting | Seetayya Foundation</title>
+    <script is:inline define:vars={{ target }}>window.location.replace(target);</script>
+  </head>
+  <body>
+    <p>Redirecting from {legacy}. <a href={target}>Continue</a>.</p>
+  </body>
+</html>

@@ -1,5 +1,7 @@
 ---
+import { formatDate, localizePath, text } from "../lib/i18n";
 import { withBase } from "../lib/url";
+import type { Locale } from "../data/site";
 
 interface Localized {
   en: string;
@@ -13,20 +15,17 @@ interface Props {
   date?: Date;
   category: string;
   image: string;
+  locale: Locale;
 }
 
-const { href, title, summary, date, category, image } = Astro.props;
-const dateText = date?.toLocaleDateString("en-IN", {
-  day: "numeric",
-  month: "short",
-  year: "numeric"
-});
+const { href, title, summary, date, category, image, locale } = Astro.props;
+const dateText = formatDate(date, locale);
 ---
 
 <article class="group overflow-hidden rounded-lg border border-ink/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
-  <a href={withBase(href)} class="block">
+  <a href={localizePath(locale, href)} class="block">
     <div class="aspect-[4/3] overflow-hidden bg-leaf-50">
-      <img src={withBase(image)} alt={title.en} loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+      <img src={withBase(image)} alt={text(title, locale)} loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
     </div>
     <div class="space-y-3 p-5">
       <div class="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-wide text-leaf-700">
@@ -38,9 +37,8 @@ const dateText = date?.toLocaleDateString("en-IN", {
           </>
         )}
       </div>
-      <h3 class="text-xl font-extrabold leading-tight text-ink">{title.en}</h3>
-      {title.te && <p class="telugu text-sm font-semibold text-ink/70">{title.te}</p>}
-      <p class="line-clamp-3 text-sm leading-6 text-ink/70">{summary.en}</p>
+      <h3 class="text-xl font-extrabold leading-tight text-ink">{text(title, locale)}</h3>
+      <p class="line-clamp-3 text-sm leading-6 text-ink/70">{text(summary, locale)}</p>
     </div>
   </a>
 </article>

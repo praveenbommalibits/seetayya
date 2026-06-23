@@ -1,0 +1,136 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TrustBadge from "../../components/TrustBadge.astro";
+import { localizePath, text } from "../../lib/i18n";
+import { withBase } from "../../lib/url";
+import {
+  contactInfo,
+  locales,
+  pageMeta,
+  siteMeta,
+  volunteerTracks,
+  type Locale
+} from "../../data/site";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale }, props: { locale } }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
+const subject = encodeURIComponent("Volunteer enquiry - Seetayya Foundation");
+---
+
+<BaseLayout title={`${text(pageMeta.volunteer.title, locale)} | ${siteMeta.name}`} description={text(pageMeta.volunteer.description, locale)} locale={locale} path={`/${locale}/volunteer`} image="/uploads/events/residents-care.jpg">
+  <section class="section-pad bg-white">
+    <div class="container-pad grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+      <div data-reveal>
+        <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-leaf-700">{locale === "te" ? "స్వచ్ఛంద సేవ" : "Volunteer with us"}</p>
+        <h1 class="mt-3 text-5xl font-black leading-tight text-ink">{locale === "te" ? "మీ ఉద్యోగం కొనసాగిస్తూ సేవ చేయండి." : "Serve while continuing your regular work."}</h1>
+        <p class="mt-5 text-lg leading-8 text-ink/72">{text(pageMeta.volunteer.description, locale)}</p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="#volunteer-form" class="inline-flex justify-center rounded-md bg-leaf-700 px-6 py-3 text-sm font-extrabold text-white transition hover:bg-leaf-900">
+            {locale === "te" ? "స్వచ్ఛంద సేవకు నమోదు" : "Register interest"}
+          </a>
+          <a href={localizePath(locale, "/csr-partnerships")} class="inline-flex justify-center rounded-md border border-leaf-700 px-6 py-3 text-sm font-extrabold text-leaf-700 transition hover:bg-leaf-50">
+            {locale === "te" ? "కార్పొరేట్ వాలంటీరింగ్" : "Corporate volunteering"}
+          </a>
+        </div>
+      </div>
+      <img src={withBase("/uploads/events/residents-care.jpg")} alt={locale === "te" ? "సీతయ్య ఫౌండేషన్‌లో నివాసుల సంరక్షణ" : "Resident care at Seetayya Foundation"} class="rounded-lg object-cover shadow-soft" />
+    </div>
+  </section>
+
+  <section class="section-pad">
+    <div class="container-pad" data-reveal>
+      <div class="max-w-3xl">
+        <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-terracotta-700">{locale === "te" ? "మీకు సరిపోయే పాత్ర" : "Choose a role that fits"}</p>
+        <h2 class="mt-3 text-4xl font-black leading-tight text-ink">{locale === "te" ? "వారాంతం, remote, onsite, corporate team సేవ." : "Weekend, remote, on-site, or corporate team service."}</h2>
+      </div>
+      <div class="mt-8 grid gap-5 md:grid-cols-2">
+        {volunteerTracks.map((track) => (
+          <article class="rounded-lg border border-ink/10 bg-white p-6 shadow-sm">
+            <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-leaf-700">{text(track.commitment, locale)}</p>
+            <h3 class="mt-3 text-2xl font-black leading-tight text-ink">{text(track.title, locale)}</h3>
+            <p class="mt-4 text-sm leading-6 text-ink/70">{text(track.text, locale)}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad bg-white">
+    <div class="container-pad grid gap-8 lg:grid-cols-[0.8fr_1.2fr]" data-reveal>
+      <div>
+        <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-leaf-700">{locale === "te" ? "సురక్షిత సేవ" : "Safe, useful service"}</p>
+        <h2 class="mt-3 text-4xl font-black leading-tight text-ink">{locale === "te" ? "ప్రతి volunteer కు స్పష్టమైన పని ఇవ్వబడుతుంది." : "Every volunteer gets a clear task."}</h2>
+        <p class="mt-4 text-lg leading-8 text-ink/72">
+          {locale === "te"
+            ? "Volunteering ముందు availability, skill, comfort level తెలుసుకుని role assign చేస్తాం. Resident dignity, consent, privacy ఎప్పుడూ ముఖ్యమే."
+            : "Before volunteering, we understand availability, skills, and comfort level, then assign a role. Resident dignity, consent, and privacy always come first."}
+        </p>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        <TrustBadge label={locale === "te" ? "పని సమయం" : "Time"} value={locale === "te" ? "వారాంతం / సాయంత్రం / remote" : "Weekend / evening / remote"} />
+        <TrustBadge label={locale === "te" ? "పాత్రలు" : "Roles"} value={locale === "te" ? "Meal, event, digital, fundraising" : "Meal, event, digital, fundraising"} tone="gold" />
+        <TrustBadge label={locale === "te" ? "గౌరవం" : "Dignity"} value={locale === "te" ? "ఫోటోలు consent తో మాత్రమే" : "Photos only with consent"} tone="indigo" />
+        <TrustBadge label={locale === "te" ? "CSR టీమ్స్" : "CSR teams"} value={locale === "te" ? "Half-day లేదా monthly plan" : "Half-day or monthly plan"} tone="terracotta" />
+      </div>
+    </div>
+  </section>
+
+  <section id="volunteer-form" class="section-pad">
+    <div class="container-pad grid gap-8 lg:grid-cols-[0.9fr_1.1fr]" data-reveal>
+      <div>
+        <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-terracotta-700">{locale === "te" ? "నమోదు" : "Register interest"}</p>
+        <h2 class="mt-3 text-4xl font-black leading-tight text-ink">{locale === "te" ? "మీ availability చెప్పండి, మేము role సూచిస్తాం." : "Tell us your availability, and we will suggest a role."}</h2>
+        <p class="mt-4 text-lg leading-8 text-ink/72">
+          {locale === "te"
+            ? "మీరు student, employee, retiree, corporate team ఎవరో అయినా, foundation అవసరానికి సరిపోయే విధంగా సేవను plan చేస్తాం."
+            : "Whether you are a student, employee, retired professional, or corporate team, we will plan the service around real foundation needs."}
+        </p>
+      </div>
+      <form action={`mailto:${contactInfo.email}?subject=${subject}`} method="post" enctype="text/plain" class="paper-panel rounded-lg p-6">
+        <div class="grid gap-4 md:grid-cols-2">
+          <label class="grid gap-2 text-sm font-bold text-ink">
+            {locale === "te" ? "పేరు" : "Name"}
+            <input name="Name" required class="rounded-md border border-ink/15 px-3 py-3 font-normal" />
+          </label>
+          <label class="grid gap-2 text-sm font-bold text-ink">
+            {locale === "te" ? "ఫోన్ / ఇమెయిల్" : "Phone / email"}
+            <input name="Contact" required class="rounded-md border border-ink/15 px-3 py-3 font-normal" />
+          </label>
+          <label class="grid gap-2 text-sm font-bold text-ink">
+            {locale === "te" ? "Availability" : "Availability"}
+            <select name="Availability" class="rounded-md border border-ink/15 px-3 py-3 font-normal">
+              <option>Weekend</option>
+              <option>Evening</option>
+              <option>Remote</option>
+              <option>Corporate group</option>
+            </select>
+          </label>
+          <label class="grid gap-2 text-sm font-bold text-ink">
+            {locale === "te" ? "ఆసక్తి" : "Interest"}
+            <select name="Volunteer interest" class="rounded-md border border-ink/15 px-3 py-3 font-normal">
+              <option>Meal service / resident care</option>
+              <option>Remote digital support</option>
+              <option>Health camp / event support</option>
+              <option>Fundraising / donor support</option>
+            </select>
+          </label>
+          <label class="grid gap-2 text-sm font-bold text-ink md:col-span-2">
+            {locale === "te" ? "నైపుణ్యాలు / సందేశం" : "Skills / message"}
+            <textarea name="Skills or message" rows="5" class="rounded-md border border-ink/15 px-3 py-3 font-normal"></textarea>
+          </label>
+        </div>
+        <label class="mt-5 flex gap-3 text-sm leading-6 text-ink/72">
+          <input type="checkbox" required class="mt-1" />
+          <span>{locale === "te" ? "నా volunteer enquiry కు స్పందించడానికి ఫౌండేషన్ ఈ వివరాలను ఉపయోగించవచ్చని అంగీకరిస్తున్నాను." : "I consent to the foundation using these details to respond to my volunteer enquiry."}</span>
+        </label>
+        <button class="mt-6 rounded-md bg-leaf-700 px-5 py-3 text-sm font-extrabold text-white transition hover:bg-leaf-900">
+          {locale === "te" ? "ఇమెయిల్ ద్వారా పంపండి" : "Send by email"}
+        </button>
+        <p class="mt-4 text-xs leading-5 text-ink/55">{locale === "te" ? "ఈ static form visitor email client ను తెరుస్తుంది." : "This static form opens the visitor's email client."}</p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PhotoGrid from "../../../components/PhotoGrid.astro";
+import { localizePath, text } from "../../../lib/i18n";
+import { categoryLabels, locales, siteMeta, type Locale } from "../../../data/site";
+
+export async function getStaticPaths() {
+  const albums = (await getCollection("albums")).filter((entry) => entry.data.published);
+  return locales.flatMap((locale) =>
+    albums.map((album) => ({
+      params: { locale, slug: album.slug },
+      props: { locale, album }
+    }))
+  );
+}
+
+const { locale, album } = Astro.props as {
+  locale: Locale;
+  album: CollectionEntry<"albums">;
+};
+---
+
+<BaseLayout title={`${text(album.data.title, locale)} | ${siteMeta.name}`} description={text(album.data.summary, locale)} locale={locale} path={`/${locale}/media/${album.slug}`} image={album.data.coverImage}>
+  <section class="section-pad bg-white">
+    <div class="container-pad">
+      <a href={localizePath(locale, "/media")} class="text-sm font-extrabold text-leaf-700 underline">{locale === "te" ? "అన్ని ఆల్బమ్‌లు" : "All albums"}</a>
+      <p class="mt-6 text-sm font-extrabold uppercase tracking-[0.18em] text-terracotta-700">{text(categoryLabels[album.data.category] ?? { en: album.data.category, te: album.data.category }, locale)}</p>
+      <h1 class="mt-3 max-w-3xl text-5xl font-black leading-tight text-ink">{text(album.data.title, locale)}</h1>
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-ink/72">{text(album.data.summary, locale)}</p>
+    </div>
+  </section>
+  <section class="section-pad">
+    <div class="container-pad">
+      <PhotoGrid photos={album.data.photos} />
+    </div>
+  </section>
+</BaseLayout>

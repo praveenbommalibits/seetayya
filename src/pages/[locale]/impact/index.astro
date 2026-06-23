@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import DonationCta from "../../../components/DonationCta.astro";
+import StoryCard from "../../../components/StoryCard.astro";
+import { text } from "../../../lib/i18n";
+import { locales, pageMeta, siteMeta, type Locale } from "../../../data/site";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale }, props: { locale } }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
+const stories = (await getCollection("stories"))
+  .filter((entry) => entry.data.published)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title={`${text(pageMeta.impact.title, locale)} | ${siteMeta.name}`} description={text(pageMeta.impact.description, locale)} locale={locale} path={`/${locale}/impact`} image="/uploads/events/residents-care.jpg">
+  <section class="section-pad bg-white">
+    <div class="container-pad">
+      <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-terracotta-700">{locale === "te" ? "ప్రభావం" : "Impact"}</p>
+      <h1 class="mt-3 max-w-4xl text-5xl font-black leading-tight text-ink">{locale === "te" ? "కార్యక్రమాల కంటే ముందు మనుషులు." : "People first, programmes second."}</h1>
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-ink/72">
+        {locale === "te"
+          ? "ఈ కథలు ఫౌండేషన్ సేవలోని మానవ కోణాన్ని చూపిస్తాయి: స్థాపకుల నిర్ణయం, వృద్ధాశ్రమ నిత్య సంరక్షణ, దివ్యాంగ పిల్లల పునరావాస దృష్టి."
+          : "These stories separate human outcomes from event updates: the founders' decision, daily old-age-home care, and the rehabilitation vision for differently abled children."}
+      </p>
+    </div>
+  </section>
+
+  <section class="section-pad">
+    <div class="container-pad grid gap-6 md:grid-cols-3">
+      {stories.map((story) => <StoryCard {...story.data} locale={locale} />)}
+    </div>
+  </section>
+
+  <DonationCta compact locale={locale} />
+</BaseLayout>
