@@ -27,7 +27,7 @@ The redesigned Astro build preserves the public foundation story, contact detail
 | Ongoing projects `/on-going-projects/` | Yes | Yes | Migrated into Programs; legacy redirect points to `/en/programs`. |
 | Children rehabilitation center `/children-rehablitation-center/` | Yes | Yes | Migrated into Programs as the rehabilitation project; legacy redirect points to `/en/programs#rehabilitation`. |
 | Become a volunteer `/become-a-volunteer/` | Yes | Covered by Contact | Legacy redirect points to `/en/contact`; volunteer intent is handled through contact form and CTA copy. |
-| Videos `/videos/` | Yes | Covered by Media | Legacy redirect points to `/en/media`; public video embeds can be added when final video URLs are selected. |
+| Videos `/videos/` | Yes | Covered by Events | Legacy redirect points to `/en/media`, which links visitors to the Events page Videos tab with click-to-load YouTube embeds. |
 | Gallery `/gallery/` | Yes | Yes | Migrated into Media / Gallery using authentic local images and albums. |
 | Articles `/articles-2/` and `/hello-world/` | Yes | Yes | Founder story and Independence Day content are migrated; `/articles-2/` routes to the Independence Day event and default `hello-world` routes to `/en`. |
 | Donate `/donate/` | Yes | Yes | Rebuilt as static-friendly donation page with hosted Razorpay/GiveWP fallback. |

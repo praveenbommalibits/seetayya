@@ -1,10 +1,10 @@
-# Hosting Plan: Vercel + Old Bluehost Site in Parallel
+# Hosting Plan: Vercel + Old WordPress Site in Parallel
 
-Goal: new Astro site on Vercel, old WordPress site (Bluehost) stays live for some days, then clean cutover of `seetayyafoundation.org`.
+Goal: new Astro site on Vercel, old WordPress site stays live for some days, then clean cutover of `seetayyafoundation.org`. Public DNS currently points at SunlightHost/StackDNS nameservers and StackCDN-style hosting, so use the active DNS/hosting control panel for the domain steps below.
 
 ## Phase 0 — Security (do this first)
 
-- The Bluehost and Gmail passwords have been shared over WhatsApp/chat. **Change both passwords now** and enable 2-step verification on the Gmail account. That Gmail is the donation-receipt contact, so it is a high-value target.
+- The hosting/DNS and Gmail passwords have been shared over WhatsApp/chat. **Change both passwords now** and enable 2-step verification on the Gmail account. That Gmail is the donation-receipt contact, so it is a high-value target.
 - Never store hosting passwords in this repo.
 
 ## Phase 1 — Deploy the new site to Vercel (no DNS changes yet)
@@ -20,9 +20,9 @@ Old site is untouched; nothing public changes.
 
 ## Phase 2 — Parallel run (both sites live, some days)
 
-- Old site: stays exactly where it is — `seetayyafoundation.org` → Bluehost.
+- Old site: stays exactly where it is — `seetayyafoundation.org` continues pointing at the current WordPress host.
 - New site: give it a public preview subdomain.
-  1. Bluehost → Domains → DNS for `seetayyafoundation.org`: add **CNAME** record `new` → `cname.vercel-dns.com`. Touch nothing else (especially MX records).
+  1. Current DNS panel for `seetayyafoundation.org`: add **CNAME** record `new` → `cname.vercel-dns.com`. Touch nothing else (especially MX records).
   2. Vercel → project → Domains: add `new.seetayyafoundation.org`.
   3. Result: old site at `seetayyafoundation.org`, new site at `new.seetayyafoundation.org`. Share the new URL for review.
 - SEO guard during this phase: keep search engines off the duplicate. Add to `vercel.json`:
@@ -35,16 +35,16 @@ Old site is untouched; nothing public changes.
 
 1. Remove the `X-Robots-Tag: noindex` header from `vercel.json`, redeploy.
 2. Vercel → Domains: add `seetayyafoundation.org` and `www.seetayyafoundation.org`.
-3. Bluehost DNS:
+3. Current DNS panel:
    - `@` (apex) **A record** → `76.76.21.21` (Vercel)
    - `www` **CNAME** → `cname.vercel-dns.com`
    - **Do not change MX/TXT records.**
-4. DNS propagates in minutes–hours. Old site becomes unreachable on the domain but keeps running on Bluehost hosting (reachable via Bluehost's temporary URL if needed).
-5. Rollback at any time = point the A record back to the old Bluehost IP (note it down before changing!).
+4. DNS propagates in minutes-hours. Old site becomes unreachable on the domain but keeps running on the current WordPress host if the hosting plan remains active.
+5. Rollback at any time = point the A record back to the old host IP (note it down before changing!).
 
 ## Phase 4 — Wind-down (after a safe period, e.g., 2–4 weeks)
 
-1. Backups from Bluehost before cancelling anything:
+1. Backups from the current WordPress host before cancelling anything:
    - WordPress: Tools → Export (content XML)
    - `wp-content/uploads` folder via file manager (includes the 3 self-hosted .mp4 videos — re-upload those to YouTube and add IDs to `videos` in `src/data/site.ts`)
    - Database dump via phpMyAdmin

@@ -3,7 +3,7 @@
 ## 2026-07-03 Old-site content parity (branch: feature/old-site-content-parity)
 
 - Added CMS-editable `highlights` collection and a homepage Highlights strip with the 8 news moments from the old homepage (original Telugu captions + English translations).
-- Added Videos section on the Media page with the 15 YouTube videos from the old `/videos/` page (click-to-load, privacy-friendly embeds).
+- Added Videos tab on the Events page with the 15 YouTube videos from the old `/videos/` page (click-to-load, privacy-friendly embeds).
 - Added "Apply via Google Form" volunteer application link from the old site.
 - Added the 5th Anniversary and New Building Inauguration event.
 - See `CONTENT_PARITY_PLAN.md` for the full gap analysis and follow-ups.

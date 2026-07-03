@@ -12,7 +12,7 @@ The new Astro site already covers most of the old site (see `MIGRATION_AUDIT.md`
 | # | Old-site content | Status before | Action taken |
 |---|---|---|---|
 | 1 | **Highlights** — 8 Telugu-captioned news moments on the old homepage (wheelchair donation, free eye operations, legal awareness judge visit, 5th-anniversary building inauguration, Collector's 8 gas cylinders, SI's 2-month grocery donation, ex-CBI JD V. V. Lakshmi Narayana visit, elderly widow given shelter) | Missing entirely | New `highlights` content collection (CMS-editable) + horizontally scrolling Highlights section on the homepage. Original Telugu captions preserved, English translations added. Photos reuse the already-migrated `/uploads/legacy/` files. |
-| 2 | **Videos page** — 15 YouTube videos | Missing (media page had albums only) | `videos` list in `src/data/site.ts` + Videos section on Media page with click-to-load `youtube-nocookie` embeds (no third-party JS until the visitor plays). |
+| 2 | **Videos page** — 15 YouTube videos | Missing (media page had albums only) | `videos` list in `src/data/site.ts` + Videos tab on the Events page with click-to-load `youtube-nocookie` embeds (no third-party JS until the visitor plays). Media links point visitors to Events for videos. |
 | 3 | **Volunteer Google Form** (`forms.gle/9pr3qaDqRy4zXTpR9`, with resume/Aadhaar upload) | Only a mailto form | "Apply via Google Form" button added on the Volunteer page next to the existing form. |
 | 4 | **5th Anniversary + new building inauguration** | Not in events | Added as a proper event with the ceremony photo. |
 
@@ -38,4 +38,4 @@ npm run dev
 # open http://127.0.0.1:4321/en  (and /te)
 ```
 
-Pages to check: homepage (new Highlights strip after Latest activities), `/en/media` (Videos section), `/en/volunteer` (Google Form button), `/en/events` (anniversary event).
+Pages to check: homepage (new Highlights strip after Latest activities), `/en/events` (Videos tab + anniversary event), `/en/media` (video pointer), `/en/volunteer` (Google Form button).

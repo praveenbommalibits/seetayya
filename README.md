@@ -81,7 +81,7 @@ Do not hardcode admin usernames or passwords in this static site. Static JavaScr
 
 For one shared admin login, create one dedicated GitHub account for the foundation, secure it with two-factor authentication, and grant that account write access to this repository. The admin can then open `/admin`, sign in with GitHub, edit content, upload photos, and commit changes. GitHub Actions rebuilds the public site after each CMS commit.
 
-If the site is later hosted on Bluehost and `/admin` also needs an extra password prompt, protect the `/admin` directory through Bluehost/cPanel Directory Privacy or Apache Basic Auth. Keep the password hash outside the public web root.
+If the site is later hosted behind a traditional hosting control panel and `/admin` also needs an extra password prompt, protect the `/admin` directory through directory privacy or Apache Basic Auth. Keep the password hash outside the public web root.
 
 ## Add an Event
 
