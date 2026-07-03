@@ -121,6 +121,18 @@ const stories = defineCollection({
   })
 });
 
+const highlights = defineCollection({
+  type: "data",
+  schema: z.object({
+    slug: z.string(),
+    caption: localizedText,
+    image: z.string(),
+    alt: localizedText,
+    order: z.number().default(0),
+    published: z.boolean().default(true)
+  })
+});
+
 const pages = defineCollection({
   type: "content",
   schema: z.object({
@@ -155,6 +167,7 @@ export const collections = {
   certificates,
   testimonials,
   heroSlides,
+  highlights,
   stories,
   pages,
   donationSettings

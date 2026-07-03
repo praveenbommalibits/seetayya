@@ -439,6 +439,25 @@ export const volunteerTracks = [
   text: LocalizedText;
 }>;
 
+// YouTube videos migrated from the old website /videos/ page.
+export const videos = [
+  { id: "8kL_gP-pw2k" },
+  { id: "S1Gv007qu6o" },
+  { id: "CFdkJ2ATYvc" },
+  { id: "fSh8zndWgEU" },
+  { id: "tHSl4SSIpic" },
+  { id: "SvPJh5RktfE" },
+  { id: "K1f1RTwYT9Q" },
+  { id: "gSiv7iuC3aM" },
+  { id: "-fRegvA715U" },
+  { id: "joukAfqvQOQ" },
+  { id: "_TFBVOCqXP4" },
+  { id: "fjKEOSvnlTc" },
+  { id: "dXwJLAPn-Qg" },
+  { id: "koF1deG70Lg" },
+  { id: "Vq8bVi3qZ2Q" }
+] as const;
+
 export const stats = [
   { value: { en: "2019", te: "2019" }, label: { en: "Founded for service", te: "సేవ కోసం ప్రారంభం" } },
   { value: { en: "2", te: "2" }, label: { en: "Buildings constructed", te: "నిర్మించిన భవనాలు" } },
