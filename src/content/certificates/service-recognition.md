@@ -10,7 +10,7 @@ status:
   te: "Section 12AA కింద registration order. Registration reference: CIT(EXEMPTION) HYD/2020-21/12AA/10518. తేదీ: 31-03-2021."
 publicNumber: "CIT(EXEMPTION) HYD/2020-21/12AA/10518"
 featured: false
-order: 5
+order: 6
 published: true
 ---
 

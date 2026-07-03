@@ -29,7 +29,7 @@ The redesigned Astro build preserves the public foundation story, contact detail
 | Become a volunteer `/become-a-volunteer/` | Yes | Covered by Contact | Legacy redirect points to `/en/contact`; volunteer intent is handled through contact form and CTA copy. |
 | Videos `/videos/` | Yes | Covered by Media | Legacy redirect points to `/en/media`; public video embeds can be added when final video URLs are selected. |
 | Gallery `/gallery/` | Yes | Yes | Migrated into Media / Gallery using authentic local images and albums. |
-| Articles `/articles-2/` and `/hello-world/` | Yes | Partially | Founder story and Independence Day content are migrated; default `hello-world` routes to `/en`. |
+| Articles `/articles-2/` and `/hello-world/` | Yes | Yes | Founder story and Independence Day content are migrated; `/articles-2/` routes to the Independence Day event and default `hello-world` routes to `/en`. |
 | Donate `/donate/` | Yes | Yes | Rebuilt as static-friendly donation page with hosted Razorpay/GiveWP fallback. |
 | GiveWP donation forms `/donations/`, `/donations/help-seetayya-foundation/`, `/donations/donation/` | Yes | Redirect missing | Added legacy redirects to `/en/donate`; old Razorpay/GiveWP fallback remains documented. |
 | Donation confirmation / failed / dashboard pages | Yes | Redirects | Redirects point to `/en/donate`; static site does not recreate private donor dashboard. |
@@ -42,13 +42,13 @@ The redesigned Astro build preserves the public foundation story, contact detail
 | Form 10AC - Section 12A | Yes / local file | Yes | Displayed on homepage trust showcase and Transparency with registration number `AAYTS9135NE20219`. |
 | Form 10AC - Section 80G | Yes / local file | Yes | Displayed on homepage trust showcase, Donate, and Transparency with registration number `AAYTS9135NF20217`; approval date shown as `08-02-2022` and validity as AY 2022-23 to AY 2026-27. |
 | CSR certificate | Yes / local file | Yes | Displayed with scan modal and CSR partner block; CSR registration number filled as `CSR00059810`. |
-| NGO Darpan ID | Not located in public crawl or available certificate scans | No | Shown as `Not found in available scans` instead of an invented value. |
+| NGO Darpan ID | Supplied Darpan document | Yes | Displayed as `AP/2024/0425381` with Darpan registration date `26-07-2024`; certificate PDF and preview are shown on Transparency. |
 | PAN for receipts | Yes / certificate scans | Yes | Income Tax scans show `AAYTS9135N`; site uses that value. CSR letter appears to show `AAYTS9153N`, so this mismatch is noted for records. |
 | Audited financials / annual report PDFs | Not located in public crawl | Placeholder | Kept placeholder slot on Transparency for future uploads. |
 | FCRA status | Not located in public crawl | Gated | Donate flow continues to block foreign/NRI donations until FCRA registration and required account are confirmed. |
 | Public UPI ID / bank details | Not located in public crawl | Placeholder config | Donation settings keep UPI/bank fields empty until founder verifies safe public values. |
-| Old Razorpay/GiveWP setup | Yes | Yes | Existing old donation form remains fallback; new build documents where to paste a hosted Razorpay payment link. |
-| Authentic activity photos | Yes / local files | Yes | Local images are used in carousel, events, programs, gallery, and story cards. More founder photos can be uploaded through CMS. |
+| Old Razorpay/GiveWP setup | Yes | Replaced | New build uses admin-configured hosted Razorpay link and a hidden-by-default QR/UPI manual payment panel; old `/give/donation/` routes back to `/en/donate`. |
+| Authentic activity photos | Yes / local files | Yes | Local images are used in carousel, events, programs, gallery, and story cards. Old WordPress public upload images were also copied into a legacy media archive album. More founder photos can be uploaded through CMS. |
 | Homepage image slider | No on current draft | Missing | Added editable `heroSlides` content collection and accessible HeroCarousel component. |
 | Bento programs section | No on current draft | Missing | Added mixed-size program grid on homepage. |
 | Certificates trust showcase | Certificates existed but not homepage showcase | Missing | Added homepage certificate cards with lightbox modals and trust badges. |
@@ -65,14 +65,14 @@ Facebook and Instagram public profile metadata was visible, but individual post 
 
 ## Items Still Not Found In Available Scans
 
-- NGO Darpan ID, if registered.
 - Audited financials / annual report PDFs.
 - Public UPI ID, bank details, and QR image.
 - Any Facebook/Instagram photos or videos that should be embedded or migrated as formal gallery content.
 
-## Certificate Values Extracted From Scans
+## Certificate Values Extracted From Scans And Supplied Documents
 
 - Foundation registration: `440-2019`, date `01-10-2019`.
+- NGO Darpan ID: `AP/2024/0425381`, Darpan registration date `26-07-2024`.
 - PAN used on site: `AAYTS9135N`, visible on 12AA, 12A, and 80G Income Tax scans.
 - 12AA registration reference: `CIT(EXEMPTION) HYD/2020-21/12AA/10518`, date `31-03-2021`.
 - 12A Form 10AC unique registration number: `AAYTS9135NE20219`, date `24-09-2021`.

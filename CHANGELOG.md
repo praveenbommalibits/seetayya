@@ -19,3 +19,5 @@
 - Added legacy redirect pages so old URLs point to the new English routes.
 - Documented local setup, content editing, GitHub Pages deployment, custom-domain base-path switching, and donation configuration.
 - Made certificate homepage featuring and display order editable through the admin CMS.
+- Split Donate into Razorpay hosted-payment and hidden-by-default QR/UPI manual-payment paths.
+- Migrated the old WordPress public upload images into a legacy media archive album.
