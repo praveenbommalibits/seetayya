@@ -81,7 +81,7 @@ Do not hardcode admin usernames or passwords in this static site. Static JavaScr
 
 For one shared admin login, create one dedicated GitHub account for the foundation, secure it with two-factor authentication, and grant that account write access to this repository. The admin can then open `/admin`, sign in with GitHub, edit content, upload photos, and commit changes. GitHub Actions rebuilds the public site after each CMS commit.
 
-If the site is later hosted on Bluehost and `/admin` also needs an extra password prompt, protect the `/admin` directory through Bluehost/cPanel Directory Privacy or Apache Basic Auth. Keep the password hash outside the public web root.
+If the site is later hosted behind a traditional hosting control panel and `/admin` also needs an extra password prompt, protect the `/admin` directory through directory privacy or Apache Basic Auth. Keep the password hash outside the public web root.
 
 ## Add an Event
 
@@ -124,14 +124,16 @@ Upload images through `/admin` or place them in `public/uploads`. Use authentic 
 
 ## Donation Configuration
 
-The Donate page is static and cannot create server-side payment orders. Use Razorpay Payment Pages, Razorpay Payment Buttons, or the existing verified GiveWP/Razorpay form.
+The Donate page is static and cannot create server-side payment orders. Use a hosted Razorpay Payment Page or Payment Link for gateway payments, and use the QR/UPI fields for verified direct payment details.
 
 Edit `src/content/donationSettings/main.json`:
 
 - `razorpayPaymentLink`: paste the live Razorpay Payment Page URL when ready.
-- `upiId`, `upiName`, `qrImage`: add only after the foundation confirms the public UPI details are safe to display.
+- `upiId`, `upiName`, `qrImage`: add only after the foundation confirms the public UPI details are safe to display. The QR panel is hidden by default on the public Donate page and opens only when a donor clicks to show it.
 - `bankName`, `accountName`, `accountNumber`, `ifsc`: add only after verification.
 - `receiptNote`: update receipt timing and contact instructions.
+
+Razorpay and other gateways usually charge transaction fees plus tax according to the provider's current pricing. Direct QR/UPI may avoid website gateway flow, but the foundation must manually match screenshots or transaction IDs for receipts.
 
 Foreign / NRI donations are gated by default. Do not enable a foreign-donation path until FCRA registration and the required designated SBI New Delhi account are confirmed.
 
@@ -144,7 +146,7 @@ Foreign / NRI donations are gated by default. Do not enable a foreign-donation p
 - 80G registration number shown from Form 10AC: `AAYTS9135NF20217`.
 - Certificate scans are also shown on the homepage trust showcase with modal previews.
 - CSR registration number shown from MCA CSR approval letter: `CSR00059810`.
-- NGO Darpan ID is not visible in the available certificate scans.
+- NGO Darpan ID shown from the supplied Darpan document: `AP/2024/0425381`; Darpan registration date: `26-07-2024`.
 - Note: the CSR approval letter appears to show PAN `AAYTS9153N`, while the 12AA, 12A, and 80G Income Tax scans consistently show `AAYTS9135N`; the site uses the Income Tax PAN value.
 - Privacy copy is DPDP-aware and describes consent, data minimization, hosted payment handling, and contact rights.
 

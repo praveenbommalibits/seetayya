@@ -6,6 +6,7 @@ import CsrPartnerBlock from "../../components/CsrPartnerBlock.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import EventCard from "../../components/EventCard.astro";
 import HeroCarousel from "../../components/HeroCarousel.astro";
+import HighlightCard from "../../components/HighlightCard.astro";
 import ImpactTier from "../../components/ImpactTier.astro";
 import StatBand from "../../components/StatBand.astro";
 import StoryCard from "../../components/StoryCard.astro";
@@ -39,6 +40,9 @@ const stories = (await getCollection("stories"))
   .filter((entry) => entry.data.published)
   .sort((a, b) => a.data.order - b.data.order);
 const heroSlides = (await getCollection("heroSlides"))
+  .filter((entry) => entry.data.published)
+  .sort((a, b) => a.data.order - b.data.order);
+const highlights = (await getCollection("highlights"))
   .filter((entry) => entry.data.published)
   .sort((a, b) => a.data.order - b.data.order);
 const certificates = (await getCollection("certificates"))
@@ -178,6 +182,32 @@ const bentoClasses = [
       </div>
     </div>
   </section>
+
+  {highlights.length > 0 && (
+    <section class="section-pad">
+      <div class="container-pad" data-reveal>
+        <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-terracotta-700">{locale === "te" ? "హైలైట్స్" : "Highlights"}</p>
+            <h2 class="mt-3 text-4xl font-black text-ink">{locale === "te" ? "సమాజం గుర్తించిన సేవా ఘట్టాలు" : "Moments of service the community noticed"}</h2>
+          </div>
+          <a href={localizePath(locale, "/media")} class="text-sm font-extrabold text-leaf-700 underline">{locale === "te" ? "మీడియా / గ్యాలరీ" : "Media / Gallery"}</a>
+        </div>
+      </div>
+      <div class="mt-8 overflow-x-auto pb-4 [scrollbar-width:thin]">
+        <div class="container-pad flex snap-x snap-mandatory gap-5">
+          {highlights.map((entry) => (
+            <HighlightCard
+              caption={entry.data.caption}
+              image={entry.data.image}
+              alt={entry.data.alt}
+              locale={locale}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <section class="section-pad bg-white">
     <div class="container-pad" data-reveal>

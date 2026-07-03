@@ -88,6 +88,19 @@ const subject = encodeURIComponent("Volunteer enquiry - Seetayya Foundation");
             ? "మీరు student, employee, retiree, corporate team ఎవరో అయినా, foundation అవసరానికి సరిపోయే విధంగా సేవను plan చేస్తాం."
             : "Whether you are a student, employee, retired professional, or corporate team, we will plan the service around real foundation needs."}
         </p>
+        <a
+          href="https://forms.gle/9pr3qaDqRy4zXTpR9"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-6 inline-flex justify-center rounded-md bg-terracotta-700 px-6 py-3 text-sm font-extrabold text-white transition hover:bg-terracotta-500"
+        >
+          {locale === "te" ? "Google Form ద్వారా దరఖాస్తు చేయండి" : "Apply via Google Form"}
+        </a>
+        <p class="mt-3 text-xs leading-5 text-ink/55">
+          {locale === "te"
+            ? "పాత వెబ్‌సైట్‌లో ఉన్న అధికారిక volunteer దరఖాస్తు ఫారం (resume / Aadhaar upload తో)."
+            : "The foundation's official volunteer application form (with resume / Aadhaar upload), carried over from the old website."}
+        </p>
       </div>
       <form action={`mailto:${contactInfo.email}?subject=${subject}`} method="post" enctype="text/plain" class="paper-panel rounded-lg p-6">
         <div class="grid gap-4 md:grid-cols-2">

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-07-03 Old-site content parity (branch: feature/old-site-content-parity)
+
+- Added CMS-editable `highlights` collection and a homepage Highlights strip with the 8 news moments from the old homepage (original Telugu captions + English translations).
+- Added Videos tab on the Events page with the 15 YouTube videos from the old `/videos/` page (click-to-load, privacy-friendly embeds).
+- Added "Apply via Google Form" volunteer application link from the old site.
+- Added the 5th Anniversary and New Building Inauguration event.
+- See `CONTENT_PARITY_PLAN.md` for the full gap analysis and follow-ups.
+
 ## 2026 Website Redesign
 
 - Rebuilt the experience around real `/en/...` and `/te/...` locale routes.
@@ -19,3 +27,5 @@
 - Added legacy redirect pages so old URLs point to the new English routes.
 - Documented local setup, content editing, GitHub Pages deployment, custom-domain base-path switching, and donation configuration.
 - Made certificate homepage featuring and display order editable through the admin CMS.
+- Split Donate into Razorpay hosted-payment and hidden-by-default QR/UPI manual-payment paths.
+- Migrated the old WordPress public upload images into a legacy media archive album.

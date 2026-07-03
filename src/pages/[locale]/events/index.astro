@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import EventCard from "../../../components/EventCard.astro";
 import { text } from "../../../lib/i18n";
-import { categoryLabels, locales, pageMeta, siteMeta, type Locale } from "../../../data/site";
+import { categoryLabels, locales, pageMeta, siteMeta, videos, type Locale } from "../../../data/site";
 
 export function getStaticPaths() {
   return locales.map((locale) => ({ params: { locale }, props: { locale } }));
@@ -27,10 +27,35 @@ const events = (await getCollection("events"))
           ? "ప్రతి కార్యక్రమం Markdown కంటెంట్ ద్వారా ప్రచురించబడుతుంది, అందువల్ల ఫౌండేషన్ కొత్త ఫోటోలు మరియు వివరాలను సులభంగా జోడించగలదు."
           : "Each event is published from Markdown content so the foundation can add new photos and details without touching page code."}
       </p>
+
+      <div class="mt-8 inline-flex rounded-lg border border-ink/12 bg-paper p-1" role="tablist" aria-label={locale === "te" ? "కార్యక్రమాలు మరియు వీడియోలు" : "Events and videos"}>
+        <button
+          type="button"
+          id="tab-events"
+          role="tab"
+          aria-selected="true"
+          aria-controls="panel-events"
+          class="events-tab rounded-md px-5 py-2.5 text-sm font-extrabold transition"
+          data-panel="panel-events"
+        >
+          {locale === "te" ? "కార్యక్రమాలు" : "Events"}
+        </button>
+        <button
+          type="button"
+          id="tab-videos"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-videos"
+          class="events-tab rounded-md px-5 py-2.5 text-sm font-extrabold transition"
+          data-panel="panel-videos"
+        >
+          {locale === "te" ? "వీడియోలు" : "Videos"}
+        </button>
+      </div>
     </div>
   </section>
 
-  <section class="section-pad">
+  <section class="section-pad" id="panel-events" role="tabpanel" aria-labelledby="tab-events">
     <div class="container-pad grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {events.map((event) => (
         <EventCard
@@ -45,4 +70,87 @@ const events = (await getCollection("events"))
       ))}
     </div>
   </section>
+
+  <section class="section-pad hidden" id="panel-videos" role="tabpanel" aria-labelledby="tab-videos">
+    <div class="container-pad">
+      <p class="max-w-3xl text-sm leading-6 text-ink/65">
+        {locale === "te"
+          ? "ఫౌండేషన్ సేవా కార్యక్రమాల YouTube వీడియోలు. ఇక్కడే చూడవచ్చు లేదా YouTube లో తెరవవచ్చు. వీడియో play చేసినప్పుడు మాత్రమే YouTube load అవుతుంది."
+          : "YouTube videos of the foundation's service activities. Watch here or open on YouTube. YouTube loads only when a video is played."}
+      </p>
+      <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {videos.map((video) => (
+          <div class="overflow-hidden rounded-lg border border-ink/10 bg-white shadow-sm">
+            <button
+              type="button"
+              class="video-embed group relative block aspect-video w-full overflow-hidden bg-ink"
+              data-video-id={video.id}
+              aria-label={locale === "te" ? "వీడియో ప్లే చేయండి" : "Play video"}
+            >
+              <img
+                src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                alt=""
+                loading="lazy"
+                class="h-full w-full object-cover opacity-85 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
+              />
+              <span class="absolute inset-0 grid place-items-center">
+                <span class="grid h-14 w-14 place-items-center rounded-full bg-terracotta-700/95 text-white shadow-soft transition group-hover:scale-110">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72L19 12 8 5.14z"/></svg>
+                </span>
+              </span>
+            </button>
+            <div class="flex items-center justify-between px-4 py-3">
+              <span class="text-xs font-extrabold uppercase tracking-wide text-leaf-700">{locale === "te" ? "సేవా వీడియో" : "Foundation video"}</span>
+              <a
+                href={`https://www.youtube.com/watch?v=${video.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs font-extrabold text-terracotta-700 underline"
+              >
+                {locale === "te" ? "YouTube లో చూడండి" : "Watch on YouTube"}
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .events-tab[aria-selected="true"] {
+      background-color: #256331;
+      color: #ffffff;
+    }
+    .events-tab[aria-selected="false"] {
+      color: #17201a;
+    }
+  </style>
+
+  <script>
+    const tabs = document.querySelectorAll<HTMLButtonElement>(".events-tab");
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((other) => {
+          const selected = other === tab;
+          other.setAttribute("aria-selected", String(selected));
+          const panel = document.getElementById(other.dataset.panel ?? "");
+          panel?.classList.toggle("hidden", !selected);
+        });
+      });
+    });
+
+    document.querySelectorAll<HTMLButtonElement>(".video-embed").forEach((button) => {
+      button.addEventListener("click", () => {
+        const id = button.dataset.videoId;
+        if (!id) return;
+        const iframe = document.createElement("iframe");
+        iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+        iframe.title = "Seetayya Foundation video";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+        iframe.className = "absolute inset-0 h-full w-full";
+        button.replaceChildren(iframe);
+      });
+    });
+  </script>
 </BaseLayout>

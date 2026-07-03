@@ -89,7 +89,7 @@ export const trustRegistry = {
   },
   ngoDarpan: {
     label: { en: "NGO Darpan ID", te: "NGO Darpan ID" },
-    value: { en: "Not found in available scans", te: "అందుబాటులో ఉన్న స్కాన్‌లలో కనిపించలేదు" }
+    value: { en: "AP/2024/0425381", te: "AP/2024/0425381" }
   },
   pan: {
     label: { en: "PAN on official receipts", te: "అధికారిక రసీదులపై PAN" },
@@ -439,6 +439,25 @@ export const volunteerTracks = [
   text: LocalizedText;
 }>;
 
+// YouTube videos migrated from the old website /videos/ page.
+export const videos = [
+  { id: "8kL_gP-pw2k" },
+  { id: "S1Gv007qu6o" },
+  { id: "CFdkJ2ATYvc" },
+  { id: "fSh8zndWgEU" },
+  { id: "tHSl4SSIpic" },
+  { id: "SvPJh5RktfE" },
+  { id: "K1f1RTwYT9Q" },
+  { id: "gSiv7iuC3aM" },
+  { id: "-fRegvA715U" },
+  { id: "joukAfqvQOQ" },
+  { id: "_TFBVOCqXP4" },
+  { id: "fjKEOSvnlTc" },
+  { id: "dXwJLAPn-Qg" },
+  { id: "koF1deG70Lg" },
+  { id: "Vq8bVi3qZ2Q" }
+] as const;
+
 export const stats = [
   { value: { en: "2019", te: "2019" }, label: { en: "Founded for service", te: "సేవ కోసం ప్రారంభం" } },
   { value: { en: "2", te: "2" }, label: { en: "Buildings constructed", te: "నిర్మించిన భవనాలు" } },
@@ -646,8 +665,8 @@ export const impactStories = [
 
 export const transparencyNotes = {
   registration: {
-    en: "Registered charitable foundation. Registration number: 440-2019.",
-    te: "నమోదైన సేవా ఫౌండేషన్. నమోదు సంఖ్య: 440-2019."
+    en: "Registered charitable foundation. Registration number: 440-2019. NGO Darpan ID: AP/2024/0425381; Darpan registration date: 26-07-2024.",
+    te: "నమోదైన సేవా ఫౌండేషన్. నమోదు సంఖ్య: 440-2019. NGO Darpan ID: AP/2024/0425381; Darpan registration date: 26-07-2024."
   },
   tax: {
     en: "Income Tax Form 10AC scans list Section 12A registration number AAYTS9135NE20219 and Section 80G registration number AAYTS9135NF20217. The 80G approval scan shows approval dated 08-02-2022 for AY 2022-23 to AY 2026-27. Donation tax benefits are subject to applicable law and receipt requirements.",

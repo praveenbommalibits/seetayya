@@ -1,0 +1,28 @@
+---
+import { text } from "../lib/i18n";
+import { withBase } from "../lib/url";
+import type { Locale, PartialLocalizedText } from "../data/site";
+
+interface Props {
+  caption: PartialLocalizedText;
+  image: string;
+  alt: PartialLocalizedText;
+  locale: Locale;
+}
+
+const { caption, image, alt, locale } = Astro.props;
+---
+
+<figure class="flex w-[19rem] flex-none snap-start flex-col overflow-hidden rounded-lg border border-ink/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft md:w-[22rem]">
+  <div class="aspect-[16/10] overflow-hidden bg-leaf-50">
+    <img
+      src={withBase(image)}
+      alt={text(alt, locale)}
+      loading="lazy"
+      class="h-full w-full object-cover transition duration-500 hover:scale-105"
+    />
+  </div>
+  <figcaption class="flex-1 p-5 text-sm leading-6 text-ink/78">
+    {text(caption, locale)}
+  </figcaption>
+</figure>

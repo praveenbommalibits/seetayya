@@ -40,4 +40,16 @@ const albums = (await getCollection("albums"))
       ))}
     </div>
   </section>
+
+  <section class="section-pad bg-white">
+    <div class="container-pad">
+      <p class="text-sm font-extrabold uppercase tracking-[0.18em] text-terracotta-700">{locale === "te" ? "వీడియోలు" : "Videos"}</p>
+      <p class="mt-3 max-w-3xl text-lg leading-8 text-ink/72">
+        {locale === "te" ? "ఫౌండేషన్ వీడియోలు ఇప్పుడు కార్యక్రమాల పేజీలో ఉన్నాయి." : "Foundation videos now live on the Events page."}
+      </p>
+      <a href={localizePath(locale, "/events")} class="mt-4 inline-flex text-sm font-extrabold text-leaf-700 underline">
+        {locale === "te" ? "వీడియోలు చూడండి" : "Watch the videos"}
+      </a>
+    </div>
+  </section>
 </BaseLayout>

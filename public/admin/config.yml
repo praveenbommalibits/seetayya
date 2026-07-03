@@ -146,6 +146,22 @@ collections:
       - { label: Sort Order, name: order, widget: number, default: 0 }
       - { label: Published, name: published, widget: boolean, default: true }
 
+  - name: highlights
+    label: Homepage Highlights
+    folder: src/content/highlights
+    create: true
+    format: json
+    slug: "{{slug}}"
+    fields:
+      - { label: Slug, name: slug, widget: string }
+      - { label: English Caption, name: caption.en, widget: text }
+      - { label: Telugu Caption, name: caption.te, widget: text }
+      - { label: Image, name: image, widget: image }
+      - { label: English Alt Text, name: alt.en, widget: string }
+      - { label: Telugu Alt Text, name: alt.te, widget: string }
+      - { label: Sort Order, name: order, widget: number, default: 0 }
+      - { label: Published, name: published, widget: boolean, default: true }
+
   - name: testimonials
     label: Testimonials
     folder: src/content/testimonials
